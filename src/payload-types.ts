@@ -89,9 +89,11 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     home: Home;
+    blog: Blog;
   };
   globalsSelect: {
     home: HomeSelect<false> | HomeSelect<true>;
+    blog: BlogSelect<false> | BlogSelect<true>;
   };
   locale: null;
   user: User;
@@ -378,9 +380,45 @@ export interface Home {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog".
+ */
+export interface Blog {
+  id: number;
+  title: string;
+  description: string;
+  banner: number | Media;
+  seo: {
+    title: string;
+    description: string;
+    ogImage?: (number | null) | Media;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home_select".
  */
 export interface HomeSelect<T extends boolean = true> {
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        ogImage?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog_select".
+ */
+export interface BlogSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  banner?: T;
   seo?:
     | T
     | {
