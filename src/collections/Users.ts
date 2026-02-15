@@ -1,6 +1,6 @@
 import type { CollectionBeforeChangeHook, CollectionConfig } from 'payload'
+import { isAdminRequest } from '../access/isAdmin'
 
-const hasAdminRole = (user: { role?: unknown } | null | undefined): boolean => user?.role === 'admin'
 const isSameUser = (
   user: { id?: unknown } | null | undefined,
   id: number | string | undefined,
@@ -20,10 +20,11 @@ const assignRoleOnCreate: CollectionBeforeChangeHook = async ({ data, operation,
   const userData = data as Record<string, unknown>
   const incomingRole = userData.role
   const allowRoleAssignment = (req.context as Record<string, unknown> | undefined)?.allowRoleAssignment === true
+  const isAdmin = await isAdminRequest(req)
 
   // Allow explicit role only for current admin or trusted server-side context.
   if (
-    (hasAdminRole(req.user) || allowRoleAssignment) &&
+    (isAdmin || allowRoleAssignment) &&
     (incomingRole === 'admin' || incomingRole === 'user')
   ) {
     return data
@@ -51,15 +52,17 @@ export const Users: CollectionConfig = {
   },
   auth: true,
   access: {
-    admin: ({ req: { user } }) => hasAdminRole(user),
+    admin: async ({ req }) => isAdminRequest(req),
     create: () => true,
-    update: ({ req: { user }, id }) => {
-      if (hasAdminRole(user)) return true
+    update: async ({ req, id }) => {
+      if (await isAdminRequest(req)) return true
+      const { user } = req
       if (isSameUser(user, id)) return true
       return false
     },
-    read: ({ req: { user }, id }) => {
-      if (hasAdminRole(user)) return true
+    read: async ({ req, id }) => {
+      if (await isAdminRequest(req)) return true
+      const { user } = req
       if (isSameUser(user, id)) return true
       return false
     },
@@ -85,8 +88,8 @@ export const Users: CollectionConfig = {
       required: true,
       saveToJWT: true,
       access: {
-        create: ({ req: { user } }) => hasAdminRole(user),
-        update: ({ req: { user } }) => hasAdminRole(user),
+        create: async ({ req }) => isAdminRequest(req),
+        update: async ({ req }) => isAdminRequest(req),
       },
     },
     {

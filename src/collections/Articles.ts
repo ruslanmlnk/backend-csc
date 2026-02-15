@@ -1,5 +1,25 @@
-import { CollectionConfig } from 'payload'
+import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
+import type { Block, CollectionConfig } from 'payload'
 import { slugField } from '../fields/slug'
+import { isAdminRequest } from '../access/isAdmin'
+
+const articleBannerBlock: Block = {
+    slug: 'banner',
+    interfaceName: 'ArticleBannerBlock',
+    labels: {
+        singular: 'Banner',
+        plural: 'Banners',
+    },
+    fields: [
+        {
+            name: 'banner',
+            type: 'relationship',
+            relationTo: 'banners',
+            required: true,
+            label: 'Banner',
+        },
+    ],
+}
 
 export const Articles: CollectionConfig = {
     slug: 'articles',
@@ -9,6 +29,9 @@ export const Articles: CollectionConfig = {
     },
     access: {
         read: () => true,
+        create: async ({ req }) => isAdminRequest(req),
+        update: async ({ req }) => isAdminRequest(req),
+        delete: async ({ req }) => isAdminRequest(req),
     },
     fields: [
         {
@@ -18,12 +41,6 @@ export const Articles: CollectionConfig = {
             label: 'Title',
         },
         slugField(),
-        {
-            name: 'description',
-            type: 'textarea',
-            required: true,
-            label: 'Short Description (for Hero)',
-        },
         {
             name: 'image',
             type: 'upload',
@@ -57,6 +74,18 @@ export const Articles: CollectionConfig = {
             type: 'richText',
             required: true,
             label: 'Article Content',
+            editor: lexicalEditor({
+                features: ({ defaultFeatures }) => [
+                    ...defaultFeatures,
+                    BlocksFeature({
+                        blocks: [articleBannerBlock],
+                    }),
+                ],
+            }),
+            admin: {
+                description:
+                    'Use the Banner block to insert a banner from the Banners collection by name.',
+            },
         },
         {
             name: 'blockquote',

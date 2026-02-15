@@ -11,9 +11,28 @@ import { Home } from './globals/Home'
 import { Blog } from './globals/Blog'
 import { Articles } from './collections/Articles'
 import { Categories } from './collections/Categories'
+import { Banners } from './collections/Banners'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+
+const defaultAllowedOrigins = [
+  'http://localhost:3000',
+  'http://127.0.0.1:3000',
+  'http://localhost:3001',
+  'http://127.0.0.1:3001',
+]
+
+const envAllowedOrigins = [
+  process.env.BACKEND_URL,
+  process.env.NEXT_PUBLIC_BACKEND_URL,
+  process.env.FRONTEND_URL,
+  process.env.NEXT_PUBLIC_FRONTEND_URL,
+]
+  .filter(Boolean)
+  .map((origin) => origin!.replace(/\/$/, ''))
+
+const allowedOrigins = Array.from(new Set([...defaultAllowedOrigins, ...envAllowedOrigins]))
 
 export default buildConfig({
   admin: {
@@ -22,9 +41,9 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Articles, Categories],
-  cors: ['http://localhost:3001'],
-  csrf: ['http://localhost:3001'],
+  collections: [Users, Media, Banners, Articles, Categories],
+  cors: allowedOrigins,
+  csrf: allowedOrigins,
   globals: [Home, Blog],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
