@@ -1,6 +1,16 @@
 import type { CollectionBeforeChangeHook, CollectionConfig } from 'payload'
 
 const hasAdminRole = (user: { role?: unknown } | null | undefined): boolean => user?.role === 'admin'
+const isSameUser = (
+  user: { id?: unknown } | null | undefined,
+  id: number | string | undefined,
+): boolean => {
+  if (!user || user.id === undefined || id === undefined) {
+    return false
+  }
+
+  return String(user.id) === String(id)
+}
 
 const assignRoleOnCreate: CollectionBeforeChangeHook = async ({ data, operation, req }) => {
   if (operation !== 'create' || !data || typeof data !== 'object') {
@@ -45,12 +55,12 @@ export const Users: CollectionConfig = {
     create: () => true,
     update: ({ req: { user }, id }) => {
       if (hasAdminRole(user)) return true
-      if (user && user.id === id) return true
+      if (isSameUser(user, id)) return true
       return false
     },
     read: ({ req: { user }, id }) => {
       if (hasAdminRole(user)) return true
-      if (user && user.id === id) return true
+      if (isSameUser(user, id)) return true
       return false
     },
   },
