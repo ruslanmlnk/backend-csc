@@ -34,3 +34,6 @@ export default buildConfig({
   sharp,
   plugins: [],
 })
+
+// reload trigger
+// reload after types
