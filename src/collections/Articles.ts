@@ -1,4 +1,5 @@
 import { CollectionConfig } from 'payload'
+import { slugField } from '../fields/slug'
 
 export const Articles: CollectionConfig = {
     slug: 'articles',
@@ -16,16 +17,7 @@ export const Articles: CollectionConfig = {
             required: true,
             label: 'Title',
         },
-        {
-            name: 'slug',
-            type: 'text',
-            required: true,
-            unique: true,
-            admin: {
-                position: 'sidebar',
-            },
-            label: 'URL Slug',
-        },
+        slugField(),
         {
             name: 'description',
             type: 'textarea',

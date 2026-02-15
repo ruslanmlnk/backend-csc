@@ -23,6 +23,8 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Articles, Categories],
+  cors: ['http://localhost:3001'],
+  csrf: ['http://localhost:3001'],
   globals: [Home, Blog],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

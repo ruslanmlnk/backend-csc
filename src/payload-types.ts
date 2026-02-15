@@ -196,7 +196,7 @@ export interface Media {
 export interface Article {
   id: number;
   title: string;
-  slug: string;
+  slug?: string | null;
   description: string;
   image: number | Media;
   category: number | Category;
@@ -235,6 +235,7 @@ export interface Article {
 export interface Category {
   id: number;
   name: string;
+  slug?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -415,6 +416,7 @@ export interface ArticlesSelect<T extends boolean = true> {
  */
 export interface CategoriesSelect<T extends boolean = true> {
   name?: T;
+  slug?: T;
   updatedAt?: T;
   createdAt?: T;
 }
