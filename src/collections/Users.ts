@@ -43,6 +43,16 @@ export const Users: CollectionConfig = {
   access: {
     admin: ({ req: { user } }) => hasAdminRole(user),
     create: () => true,
+    update: ({ req: { user }, id }) => {
+      if (hasAdminRole(user)) return true
+      if (user && user.id === id) return true
+      return false
+    },
+    read: ({ req: { user }, id }) => {
+      if (hasAdminRole(user)) return true
+      if (user && user.id === id) return true
+      return false
+    },
   },
   hooks: {
     beforeChange: [assignRoleOnCreate],
@@ -68,6 +78,47 @@ export const Users: CollectionConfig = {
         create: ({ req: { user } }) => hasAdminRole(user),
         update: ({ req: { user } }) => hasAdminRole(user),
       },
+    },
+    {
+      name: 'name',
+      type: 'text',
+    },
+    {
+      name: 'bio',
+      type: 'textarea',
+    },
+    {
+      name: 'company',
+      type: 'text',
+    },
+    {
+      name: 'position',
+      type: 'text',
+    },
+    {
+      name: 'directions',
+      type: 'text',
+    },
+    {
+      name: 'instagram',
+      type: 'text',
+    },
+    {
+      name: 'telegram',
+      type: 'text',
+    },
+    {
+      name: 'tiktok',
+      type: 'text',
+    },
+    {
+      name: 'website',
+      type: 'text',
+    },
+    {
+      name: 'avatar',
+      type: 'upload',
+      relationTo: 'media',
     },
   ],
 }
