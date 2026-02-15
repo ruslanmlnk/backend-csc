@@ -64,7 +64,8 @@ export const Users: CollectionConfig = {
       if (await isAdminRequest(req)) return true
       const { user } = req
       if (isSameUser(user, id)) return true
-      return false
+      // Public read is required to show article author data on public pages.
+      return true
     },
   },
   hooks: {
