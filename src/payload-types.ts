@@ -139,6 +139,8 @@ export interface User {
   position?: string | null;
   directions?: string | null;
   instagram?: string | null;
+  facebook?: string | null;
+  linkedin?: string | null;
   telegram?: string | null;
   tiktok?: string | null;
   website?: string | null;
@@ -232,13 +234,16 @@ export interface Article {
     };
     [k: string]: unknown;
   };
-  blockquote?: string | null;
   tags?:
     | {
         tag?: string | null;
         id?: string | null;
       }[]
     | null;
+  /**
+   * Optional manual related articles. If empty, the frontend falls back to automatic related selection.
+   */
+  relatedArticles?: (number | Article)[] | null;
   status?: ('draft' | 'published') | null;
   updatedAt: string;
   createdAt: string;
@@ -352,6 +357,8 @@ export interface UsersSelect<T extends boolean = true> {
   position?: T;
   directions?: T;
   instagram?: T;
+  facebook?: T;
+  linkedin?: T;
   telegram?: T;
   tiktok?: T;
   website?: T;
@@ -427,13 +434,13 @@ export interface ArticlesSelect<T extends boolean = true> {
   author?: T;
   publishedDate?: T;
   content?: T;
-  blockquote?: T;
   tags?:
     | T
     | {
         tag?: T;
         id?: T;
       };
+  relatedArticles?: T;
   status?: T;
   updatedAt?: T;
   createdAt?: T;

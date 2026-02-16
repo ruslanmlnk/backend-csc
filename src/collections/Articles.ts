@@ -88,11 +88,6 @@ export const Articles: CollectionConfig = {
             },
         },
         {
-            name: 'blockquote',
-            type: 'textarea',
-            label: 'Featured Quote (Blockquote)',
-        },
-        {
             name: 'tags',
             type: 'array',
             label: 'Tags',
@@ -102,6 +97,17 @@ export const Articles: CollectionConfig = {
                     type: 'text',
                 },
             ],
+        },
+        {
+            name: 'relatedArticles',
+            type: 'relationship',
+            relationTo: 'articles',
+            hasMany: true,
+            label: 'Related Articles',
+            admin: {
+                description:
+                    'Optional manual related articles. If empty, the frontend falls back to automatic related selection.',
+            },
         },
         {
             name: 'status',

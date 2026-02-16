@@ -118,6 +118,16 @@ export const Users: CollectionConfig = {
       type: 'text',
     },
     {
+      name: 'facebook',
+      type: 'text',
+      label: 'Facebook',
+    },
+    {
+      name: 'linkedin',
+      type: 'text',
+      label: 'LinkedIn',
+    },
+    {
       name: 'telegram',
       type: 'text',
     },
