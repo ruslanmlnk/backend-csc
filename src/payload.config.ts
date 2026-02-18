@@ -14,6 +14,8 @@ import { Categories } from './collections/Categories'
 import { Banners } from './collections/Banners'
 import { Comments } from './collections/Comments'
 import { Threads } from './collections/Threads'
+import { ServiceCategories } from './collections/ServiceCategories'
+import { Services } from './collections/Services'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -43,7 +45,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Banners, Articles, Categories, Comments, Threads],
+  collections: [Users, Media, Banners, Articles, Categories, ServiceCategories, Services, Comments, Threads],
   cors: allowedOrigins,
   csrf: allowedOrigins,
   globals: [Home, Blog],

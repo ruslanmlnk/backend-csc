@@ -72,6 +72,8 @@ export interface Config {
     banners: Banner;
     articles: Article;
     categories: Category;
+    'service-categories': ServiceCategory;
+    services: Service;
     comments: Comment;
     threads: Thread;
     'payload-kv': PayloadKv;
@@ -86,6 +88,8 @@ export interface Config {
     banners: BannersSelect<false> | BannersSelect<true>;
     articles: ArticlesSelect<false> | ArticlesSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
+    'service-categories': ServiceCategoriesSelect<false> | ServiceCategoriesSelect<true>;
+    services: ServicesSelect<false> | ServicesSelect<true>;
     comments: CommentsSelect<false> | CommentsSelect<true>;
     threads: ThreadsSelect<false> | ThreadsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
@@ -265,6 +269,69 @@ export interface Category {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "service-categories".
+ */
+export interface ServiceCategory {
+  id: number;
+  name: string;
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services".
+ */
+export interface Service {
+  id: number;
+  title: string;
+  slug?: string | null;
+  logo: number | Media;
+  category: number | ServiceCategory;
+  /**
+   * Short description displayed in cards on /services.
+   */
+  description: string;
+  /**
+   * Example: $ 10 /week, 28 /month
+   */
+  priceLabel: string;
+  /**
+   * Used by the "Go to the website" button on the service page.
+   */
+  websiteUrl?: string | null;
+  /**
+   * Example: @keyproxy
+   */
+  handle?: string | null;
+  mainImage?: (number | null) | Media;
+  sidebarImage?: (number | null) | Media;
+  promoCode?: string | null;
+  promoDescription?: string | null;
+  /**
+   * Main rich text content rendered on /services/[slug].
+   */
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  status?: ('draft' | 'published') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "comments".
  */
 export interface Comment {
@@ -332,6 +399,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'categories';
         value: number | Category;
+      } | null)
+    | ({
+        relationTo: 'service-categories';
+        value: number | ServiceCategory;
+      } | null)
+    | ({
+        relationTo: 'services';
+        value: number | Service;
       } | null)
     | ({
         relationTo: 'comments';
@@ -495,6 +570,38 @@ export interface CategoriesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "service-categories_select".
+ */
+export interface ServiceCategoriesSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services_select".
+ */
+export interface ServicesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  logo?: T;
+  category?: T;
+  description?: T;
+  priceLabel?: T;
+  websiteUrl?: T;
+  handle?: T;
+  mainImage?: T;
+  sidebarImage?: T;
+  promoCode?: T;
+  promoDescription?: T;
+  content?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "comments_select".
  */
 export interface CommentsSelect<T extends boolean = true> {
@@ -628,6 +735,16 @@ export interface BlogSelect<T extends boolean = true> {
  * via the `definition` "ArticleBannerBlock".
  */
 export interface ArticleBannerBlock {
+  banner: number | Banner;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'banner';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServiceBannerBlock".
+ */
+export interface ServiceBannerBlock {
   banner: number | Banner;
   id?: string | null;
   blockName?: string | null;
