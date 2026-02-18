@@ -74,6 +74,10 @@ export interface Config {
     categories: Category;
     'service-categories': ServiceCategory;
     services: Service;
+    'job-locations': JobLocation;
+    'job-experiences': JobExperience;
+    'job-formats': JobFormat;
+    jobs: Job;
     comments: Comment;
     threads: Thread;
     'payload-kv': PayloadKv;
@@ -90,6 +94,10 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     'service-categories': ServiceCategoriesSelect<false> | ServiceCategoriesSelect<true>;
     services: ServicesSelect<false> | ServicesSelect<true>;
+    'job-locations': JobLocationsSelect<false> | JobLocationsSelect<true>;
+    'job-experiences': JobExperiencesSelect<false> | JobExperiencesSelect<true>;
+    'job-formats': JobFormatsSelect<false> | JobFormatsSelect<true>;
+    jobs: JobsSelect<false> | JobsSelect<true>;
     comments: CommentsSelect<false> | CommentsSelect<true>;
     threads: ThreadsSelect<false> | ThreadsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
@@ -332,6 +340,94 @@ export interface Service {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "job-locations".
+ */
+export interface JobLocation {
+  id: number;
+  name: string;
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "job-experiences".
+ */
+export interface JobExperience {
+  id: number;
+  name: string;
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "job-formats".
+ */
+export interface JobFormat {
+  id: number;
+  name: string;
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "jobs".
+ */
+export interface Job {
+  id: number;
+  title: string;
+  slug?: string | null;
+  badge?: ('none' | 'top' | 'urgent') | null;
+  /**
+   * Shown in card row and used in "All Locations" filter.
+   */
+  location: number | JobLocation;
+  /**
+   * Shown in card row and used in "Any format" filter.
+   */
+  format: number | JobFormat;
+  /**
+   * Shown in card row and used in "Any experience" filter.
+   */
+  experience: number | JobExperience;
+  /**
+   * Example: from 1000 USD, after the interview.
+   */
+  salary: string;
+  /**
+   * Example: Kyiv, Ukraine, Remote.
+   */
+  salaryInfo: string;
+  /**
+   * Image shown in the right sidebar on /jobs/[slug].
+   */
+  sidebarImage?: (number | null) | Media;
+  /**
+   * Main content for the job details page.
+   */
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  status?: ('draft' | 'published') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "comments".
  */
 export interface Comment {
@@ -407,6 +503,22 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'services';
         value: number | Service;
+      } | null)
+    | ({
+        relationTo: 'job-locations';
+        value: number | JobLocation;
+      } | null)
+    | ({
+        relationTo: 'job-experiences';
+        value: number | JobExperience;
+      } | null)
+    | ({
+        relationTo: 'job-formats';
+        value: number | JobFormat;
+      } | null)
+    | ({
+        relationTo: 'jobs';
+        value: number | Job;
       } | null)
     | ({
         relationTo: 'comments';
@@ -602,6 +714,55 @@ export interface ServicesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "job-locations_select".
+ */
+export interface JobLocationsSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "job-experiences_select".
+ */
+export interface JobExperiencesSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "job-formats_select".
+ */
+export interface JobFormatsSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "jobs_select".
+ */
+export interface JobsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  badge?: T;
+  location?: T;
+  format?: T;
+  experience?: T;
+  salary?: T;
+  salaryInfo?: T;
+  sidebarImage?: T;
+  content?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "comments_select".
  */
 export interface CommentsSelect<T extends boolean = true> {
@@ -749,6 +910,27 @@ export interface ServiceBannerBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'banner';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "JobBannerBlock".
+ */
+export interface JobBannerBlock {
+  banner: number | Banner;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'banner';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "JobContactBlock".
+ */
+export interface JobContactBlock {
+  icon: number | Media;
+  contact: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contact';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

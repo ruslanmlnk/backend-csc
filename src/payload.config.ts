@@ -16,6 +16,10 @@ import { Comments } from './collections/Comments'
 import { Threads } from './collections/Threads'
 import { ServiceCategories } from './collections/ServiceCategories'
 import { Services } from './collections/Services'
+import { Jobs } from './collections/Jobs'
+import { JobLocations } from './collections/JobLocations'
+import { JobExperiences } from './collections/JobExperiences'
+import { JobFormats } from './collections/JobFormats'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -45,7 +49,21 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Banners, Articles, Categories, ServiceCategories, Services, Comments, Threads],
+  collections: [
+    Users,
+    Media,
+    Banners,
+    Articles,
+    Categories,
+    ServiceCategories,
+    Services,
+    JobLocations,
+    JobExperiences,
+    JobFormats,
+    Jobs,
+    Comments,
+    Threads,
+  ],
   cors: allowedOrigins,
   csrf: allowedOrigins,
   globals: [Home, Blog],
