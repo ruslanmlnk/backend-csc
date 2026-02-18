@@ -20,6 +20,8 @@ import { Jobs } from './collections/Jobs'
 import { JobLocations } from './collections/JobLocations'
 import { JobExperiences } from './collections/JobExperiences'
 import { JobFormats } from './collections/JobFormats'
+import { ConferencesVerticals } from './collections/ConferencesVerticals'
+import { Conferences } from './collections/Conferences'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -57,6 +59,8 @@ export default buildConfig({
     Categories,
     ServiceCategories,
     Services,
+    Conferences,
+    ConferencesVerticals,
     JobLocations,
     JobExperiences,
     JobFormats,

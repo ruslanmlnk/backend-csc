@@ -74,6 +74,8 @@ export interface Config {
     categories: Category;
     'service-categories': ServiceCategory;
     services: Service;
+    conferences: Conference;
+    'conferences-verticals': ConferencesVertical;
     'job-locations': JobLocation;
     'job-experiences': JobExperience;
     'job-formats': JobFormat;
@@ -94,6 +96,8 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     'service-categories': ServiceCategoriesSelect<false> | ServiceCategoriesSelect<true>;
     services: ServicesSelect<false> | ServicesSelect<true>;
+    conferences: ConferencesSelect<false> | ConferencesSelect<true>;
+    'conferences-verticals': ConferencesVerticalsSelect<false> | ConferencesVerticalsSelect<true>;
     'job-locations': JobLocationsSelect<false> | JobLocationsSelect<true>;
     'job-experiences': JobExperiencesSelect<false> | JobExperiencesSelect<true>;
     'job-formats': JobFormatsSelect<false> | JobFormatsSelect<true>;
@@ -340,9 +344,67 @@ export interface Service {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "conferences".
+ */
+export interface Conference {
+  id: number;
+  title: string;
+  slug?: string | null;
+  logo: number | Media;
+  description?: string | null;
+  /**
+   * Used in conference card and Location filter.
+   */
+  location?: (number | null) | JobLocation;
+  conferenceDate?: string | null;
+  /**
+   * Used in conference card and Vertical filter.
+   */
+  vertical?: (number | null) | ConferencesVertical;
+  /**
+   * Used by the "Go to the website" button on the conference page.
+   */
+  websiteUrl?: string | null;
+  mainImage?: (number | null) | Media;
+  sidebarImage?: (number | null) | Media;
+  /**
+   * Main rich text content rendered on /conferences/[slug].
+   */
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  status?: ('draft' | 'published') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "job-locations".
  */
 export interface JobLocation {
+  id: number;
+  name: string;
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "conferences-verticals".
+ */
+export interface ConferencesVertical {
   id: number;
   name: string;
   slug?: string | null;
@@ -503,6 +565,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'services';
         value: number | Service;
+      } | null)
+    | ({
+        relationTo: 'conferences';
+        value: number | Conference;
+      } | null)
+    | ({
+        relationTo: 'conferences-verticals';
+        value: number | ConferencesVertical;
       } | null)
     | ({
         relationTo: 'job-locations';
@@ -714,6 +784,36 @@ export interface ServicesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "conferences_select".
+ */
+export interface ConferencesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  logo?: T;
+  description?: T;
+  location?: T;
+  conferenceDate?: T;
+  vertical?: T;
+  websiteUrl?: T;
+  mainImage?: T;
+  sidebarImage?: T;
+  content?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "conferences-verticals_select".
+ */
+export interface ConferencesVerticalsSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "job-locations_select".
  */
 export interface JobLocationsSelect<T extends boolean = true> {
@@ -906,6 +1006,16 @@ export interface ArticleBannerBlock {
  * via the `definition` "ServiceBannerBlock".
  */
 export interface ServiceBannerBlock {
+  banner: number | Banner;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'banner';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ConferenceBannerBlock".
+ */
+export interface ConferenceBannerBlock {
   banner: number | Banner;
   id?: string | null;
   blockName?: string | null;
