@@ -16,6 +16,8 @@ import { Comments } from './collections/Comments'
 import { Threads } from './collections/Threads'
 import { ServiceCategories } from './collections/ServiceCategories'
 import { Services } from './collections/Services'
+import { PartnershipCategories } from './collections/PartnershipCategories'
+import { Partnerships } from './collections/Partnerships'
 import { Jobs } from './collections/Jobs'
 import { JobLocations } from './collections/JobLocations'
 import { JobExperiences } from './collections/JobExperiences'
@@ -59,6 +61,8 @@ export default buildConfig({
     Categories,
     ServiceCategories,
     Services,
+    PartnershipCategories,
+    Partnerships,
     Conferences,
     ConferencesVerticals,
     JobLocations,

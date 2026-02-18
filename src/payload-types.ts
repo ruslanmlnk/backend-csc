@@ -74,6 +74,8 @@ export interface Config {
     categories: Category;
     'service-categories': ServiceCategory;
     services: Service;
+    'partnership-categories': PartnershipCategory;
+    partnerships: Partnership;
     conferences: Conference;
     'conferences-verticals': ConferencesVertical;
     'job-locations': JobLocation;
@@ -96,6 +98,8 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     'service-categories': ServiceCategoriesSelect<false> | ServiceCategoriesSelect<true>;
     services: ServicesSelect<false> | ServicesSelect<true>;
+    'partnership-categories': PartnershipCategoriesSelect<false> | PartnershipCategoriesSelect<true>;
+    partnerships: PartnershipsSelect<false> | PartnershipsSelect<true>;
     conferences: ConferencesSelect<false> | ConferencesSelect<true>;
     'conferences-verticals': ConferencesVerticalsSelect<false> | ConferencesVerticalsSelect<true>;
     'job-locations': JobLocationsSelect<false> | JobLocationsSelect<true>;
@@ -344,6 +348,96 @@ export interface Service {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partnership-categories".
+ */
+export interface PartnershipCategory {
+  id: number;
+  name: string;
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partnerships".
+ */
+export interface Partnership {
+  id: number;
+  title: string;
+  slug?: string | null;
+  logo: number | Media;
+  /**
+   * Used in the bottom categories filter row.
+   */
+  category?: (number | null) | PartnershipCategory;
+  /**
+   * Example: 4.8
+   */
+  rating: string;
+  /**
+   * Example: 2014
+   */
+  foundedYear: string;
+  /**
+   * Used in Location filter.
+   */
+  location?: (number | null) | JobLocation;
+  models?:
+    | {
+        model: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Example: $100
+   */
+  minPayment: string;
+  offers?:
+    | {
+        offer: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Used by the "Go to the website" button on detail page.
+   */
+  websiteUrl?: string | null;
+  sidebarImage?: (number | null) | Media;
+  /**
+   * Main rich text content rendered on /partnerships/[slug].
+   */
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  status?: ('draft' | 'published') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "job-locations".
+ */
+export interface JobLocation {
+  id: number;
+  name: string;
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "conferences".
  */
 export interface Conference {
@@ -386,17 +480,6 @@ export interface Conference {
     [k: string]: unknown;
   };
   status?: ('draft' | 'published') | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "job-locations".
- */
-export interface JobLocation {
-  id: number;
-  name: string;
-  slug?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -565,6 +648,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'services';
         value: number | Service;
+      } | null)
+    | ({
+        relationTo: 'partnership-categories';
+        value: number | PartnershipCategory;
+      } | null)
+    | ({
+        relationTo: 'partnerships';
+        value: number | Partnership;
       } | null)
     | ({
         relationTo: 'conferences';
@@ -777,6 +868,48 @@ export interface ServicesSelect<T extends boolean = true> {
   sidebarImage?: T;
   promoCode?: T;
   promoDescription?: T;
+  content?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partnership-categories_select".
+ */
+export interface PartnershipCategoriesSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partnerships_select".
+ */
+export interface PartnershipsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  logo?: T;
+  category?: T;
+  rating?: T;
+  foundedYear?: T;
+  location?: T;
+  models?:
+    | T
+    | {
+        model?: T;
+        id?: T;
+      };
+  minPayment?: T;
+  offers?:
+    | T
+    | {
+        offer?: T;
+        id?: T;
+      };
+  websiteUrl?: T;
+  sidebarImage?: T;
   content?: T;
   status?: T;
   updatedAt?: T;
@@ -1010,6 +1143,28 @@ export interface ServiceBannerBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'banner';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PartnershipBannerBlock".
+ */
+export interface PartnershipBannerBlock {
+  banner: number | Banner;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'banner';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PartnershipPayoutsBlock".
+ */
+export interface PartnershipPayoutsBlock {
+  frequency: string;
+  currency: string;
+  minimumAmount: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'payouts';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
