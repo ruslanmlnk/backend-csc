@@ -82,6 +82,7 @@ export interface Config {
     'job-experiences': JobExperience;
     'job-formats': JobFormat;
     jobs: Job;
+    'contact-requests': ContactRequest;
     comments: Comment;
     threads: Thread;
     'payload-kv': PayloadKv;
@@ -106,6 +107,7 @@ export interface Config {
     'job-experiences': JobExperiencesSelect<false> | JobExperiencesSelect<true>;
     'job-formats': JobFormatsSelect<false> | JobFormatsSelect<true>;
     jobs: JobsSelect<false> | JobsSelect<true>;
+    'contact-requests': ContactRequestsSelect<false> | ContactRequestsSelect<true>;
     comments: CommentsSelect<false> | CommentsSelect<true>;
     threads: ThreadsSelect<false> | ThreadsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
@@ -573,6 +575,20 @@ export interface Job {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-requests".
+ */
+export interface ContactRequest {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  subject?: string | null;
+  message: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "comments".
  */
 export interface Comment {
@@ -680,6 +696,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'jobs';
         value: number | Job;
+      } | null)
+    | ({
+        relationTo: 'contact-requests';
+        value: number | ContactRequest;
       } | null)
     | ({
         relationTo: 'comments';
@@ -991,6 +1011,19 @@ export interface JobsSelect<T extends boolean = true> {
   sidebarImage?: T;
   content?: T;
   status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-requests_select".
+ */
+export interface ContactRequestsSelect<T extends boolean = true> {
+  firstName?: T;
+  lastName?: T;
+  email?: T;
+  subject?: T;
+  message?: T;
   updatedAt?: T;
   createdAt?: T;
 }
