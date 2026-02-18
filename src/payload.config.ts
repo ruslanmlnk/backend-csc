@@ -25,6 +25,8 @@ import { JobFormats } from './collections/JobFormats'
 import { ConferencesVerticals } from './collections/ConferencesVerticals'
 import { Conferences } from './collections/Conferences'
 import { ContactRequests } from './collections/ContactRequests'
+import { ForumCategories } from './collections/ForumCategories'
+import { ForumSubCategories } from './collections/ForumSubCategories'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -71,6 +73,8 @@ export default buildConfig({
     JobFormats,
     Jobs,
     ContactRequests,
+    ForumCategories,
+    ForumSubCategories,
     Comments,
     Threads,
   ],

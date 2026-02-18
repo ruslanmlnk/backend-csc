@@ -25,7 +25,7 @@ export const Threads: CollectionConfig = {
   slug: 'threads',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'category', 'author', 'createdAt'],
+    defaultColumns: ['title', 'category', 'isLocked', 'author', 'createdAt'],
   },
   access: {
     read: () => true,
@@ -45,9 +45,20 @@ export const Threads: CollectionConfig = {
     },
     {
       name: 'category',
-      type: 'text',
+      type: 'relationship',
+      relationTo: 'forum-sub-categories',
       required: true,
-      label: 'Category',
+      label: 'SubCategory',
+      index: true,
+    },
+    {
+      name: 'isLocked',
+      type: 'checkbox',
+      label: 'Lock Thread',
+      defaultValue: false,
+      admin: {
+        position: 'sidebar',
+      },
     },
     {
       name: 'tags',

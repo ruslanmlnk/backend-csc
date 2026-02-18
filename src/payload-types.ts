@@ -83,6 +83,8 @@ export interface Config {
     'job-formats': JobFormat;
     jobs: Job;
     'contact-requests': ContactRequest;
+    'forum-categories': ForumCategory;
+    'forum-sub-categories': ForumSubCategory;
     comments: Comment;
     threads: Thread;
     'payload-kv': PayloadKv;
@@ -108,6 +110,8 @@ export interface Config {
     'job-formats': JobFormatsSelect<false> | JobFormatsSelect<true>;
     jobs: JobsSelect<false> | JobsSelect<true>;
     'contact-requests': ContactRequestsSelect<false> | ContactRequestsSelect<true>;
+    'forum-categories': ForumCategoriesSelect<false> | ForumCategoriesSelect<true>;
+    'forum-sub-categories': ForumSubCategoriesSelect<false> | ForumSubCategoriesSelect<true>;
     comments: CommentsSelect<false> | CommentsSelect<true>;
     threads: ThreadsSelect<false> | ThreadsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
@@ -589,6 +593,32 @@ export interface ContactRequest {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "forum-categories".
+ */
+export interface ForumCategory {
+  id: number;
+  name: string;
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "forum-sub-categories".
+ */
+export interface ForumSubCategory {
+  id: number;
+  name: string;
+  description: string;
+  textAboveDate: string;
+  date: string;
+  category: number | ForumCategory;
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "comments".
  */
 export interface Comment {
@@ -606,7 +636,8 @@ export interface Comment {
 export interface Thread {
   id: number;
   title: string;
-  category: string;
+  category: number | ForumSubCategory;
+  isLocked?: boolean | null;
   tags?: string[] | null;
   content: string;
   author: number | User;
@@ -700,6 +731,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'contact-requests';
         value: number | ContactRequest;
+      } | null)
+    | ({
+        relationTo: 'forum-categories';
+        value: number | ForumCategory;
+      } | null)
+    | ({
+        relationTo: 'forum-sub-categories';
+        value: number | ForumSubCategory;
       } | null)
     | ({
         relationTo: 'comments';
@@ -1029,6 +1068,30 @@ export interface ContactRequestsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "forum-categories_select".
+ */
+export interface ForumCategoriesSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "forum-sub-categories_select".
+ */
+export interface ForumSubCategoriesSelect<T extends boolean = true> {
+  name?: T;
+  description?: T;
+  textAboveDate?: T;
+  date?: T;
+  category?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "comments_select".
  */
 export interface CommentsSelect<T extends boolean = true> {
@@ -1045,6 +1108,7 @@ export interface CommentsSelect<T extends boolean = true> {
 export interface ThreadsSelect<T extends boolean = true> {
   title?: T;
   category?: T;
+  isLocked?: T;
   tags?: T;
   content?: T;
   author?: T;
