@@ -71,15 +71,5 @@ export const Threads: CollectionConfig = {
         position: 'sidebar',
       },
     },
-    {
-      name: 'comments',
-      type: 'relationship',
-      relationTo: 'comments',
-      hasMany: true,
-      label: 'Comments',
-      admin: {
-        description: 'Attach comments from the Comments collection (tips-style relation).',
-      },
-    },
   ],
 }

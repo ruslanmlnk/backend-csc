@@ -48,6 +48,16 @@ export const Comments: CollectionConfig = {
       },
     },
     {
+      name: 'thread',
+      type: 'relationship',
+      relationTo: 'threads',
+      required: true,
+      label: 'Thread',
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
       name: 'comment',
       type: 'textarea',
       required: true,

@@ -270,6 +270,7 @@ export interface Category {
 export interface Comment {
   id: number;
   user: number | User;
+  thread: number | Thread;
   comment: string;
   updatedAt: string;
   createdAt: string;
@@ -285,10 +286,6 @@ export interface Thread {
   tags?: string[] | null;
   content: string;
   author: number | User;
-  /**
-   * Attach comments from the Comments collection (tips-style relation).
-   */
-  comments?: (number | Comment)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -502,6 +499,7 @@ export interface CategoriesSelect<T extends boolean = true> {
  */
 export interface CommentsSelect<T extends boolean = true> {
   user?: T;
+  thread?: T;
   comment?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -516,7 +514,6 @@ export interface ThreadsSelect<T extends boolean = true> {
   tags?: T;
   content?: T;
   author?: T;
-  comments?: T;
   updatedAt?: T;
   createdAt?: T;
 }
