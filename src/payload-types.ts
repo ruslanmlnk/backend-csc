@@ -131,6 +131,8 @@ export interface Config {
     'services-page': ServicesPage;
     'jobs-page': JobsPage;
     'forum-page': ForumPage;
+    'login-page': LoginPage;
+    'register-page': RegisterPage;
   };
   globalsSelect: {
     home: HomeSelect<false> | HomeSelect<true>;
@@ -140,6 +142,8 @@ export interface Config {
     'services-page': ServicesPageSelect<false> | ServicesPageSelect<true>;
     'jobs-page': JobsPageSelect<false> | JobsPageSelect<true>;
     'forum-page': ForumPageSelect<false> | ForumPageSelect<true>;
+    'login-page': LoginPageSelect<false> | LoginPageSelect<true>;
+    'register-page': RegisterPageSelect<false> | RegisterPageSelect<true>;
   };
   locale: null;
   user: User;
@@ -627,6 +631,7 @@ export interface ForumSubCategory {
   textAboveDate: string;
   date: string;
   category: number | ForumCategory;
+  banner?: (number | null) | Banner;
   slug?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -1101,6 +1106,7 @@ export interface ForumSubCategoriesSelect<T extends boolean = true> {
   textAboveDate?: T;
   date?: T;
   category?: T;
+  banner?: T;
   slug?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -1331,6 +1337,28 @@ export interface ForumPage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "login-page".
+ */
+export interface LoginPage {
+  id: number;
+  leftBanner?: (number | null) | Banner;
+  rightBanner?: (number | null) | Banner;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "register-page".
+ */
+export interface RegisterPage {
+  id: number;
+  leftBanner?: (number | null) | Banner;
+  rightBanner?: (number | null) | Banner;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home_select".
  */
 export interface HomeSelect<T extends boolean = true> {
@@ -1507,6 +1535,28 @@ export interface ForumPageSelect<T extends boolean = true> {
         description?: T;
         ogImage?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "login-page_select".
+ */
+export interface LoginPageSelect<T extends boolean = true> {
+  leftBanner?: T;
+  rightBanner?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "register-page_select".
+ */
+export interface RegisterPageSelect<T extends boolean = true> {
+  leftBanner?: T;
+  rightBanner?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

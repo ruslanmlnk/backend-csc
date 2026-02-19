@@ -14,6 +14,8 @@ import { ConferencesPage } from './globals/ConferencesPage'
 import { ServicesPage } from './globals/ServicesPage'
 import { JobsPage } from './globals/JobsPage'
 import { ForumPage } from './globals/ForumPage'
+import { LoginPage } from './globals/LoginPage'
+import { RegisterPage } from './globals/RegisterPage'
 import { Articles } from './collections/Articles'
 import { Categories } from './collections/Categories'
 import { Banners } from './collections/Banners'
@@ -86,7 +88,17 @@ export default buildConfig({
   ],
   cors: allowedOrigins,
   csrf: allowedOrigins,
-  globals: [Home, Blog, PartnershipsPage, ConferencesPage, ServicesPage, JobsPage, ForumPage],
+  globals: [
+    Home,
+    Blog,
+    PartnershipsPage,
+    ConferencesPage,
+    ServicesPage,
+    JobsPage,
+    ForumPage,
+    LoginPage,
+    RegisterPage,
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

@@ -53,6 +53,13 @@ export const ForumSubCategories: CollectionConfig = {
       label: 'Category',
       index: true,
     },
+    {
+      name: 'banner',
+      type: 'relationship',
+      relationTo: 'banners',
+      required: false,
+      label: 'Banner',
+    },
     slugField('name'),
   ],
 }
