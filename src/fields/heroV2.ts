@@ -17,5 +17,12 @@ export const heroV2Field: Field = {
       required: true,
       label: 'Description',
     },
+    {
+      name: 'banner',
+      type: 'relationship',
+      relationTo: 'banners',
+      required: false,
+      label: 'Banner',
+    },
   ],
 }

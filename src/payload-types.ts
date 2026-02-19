@@ -1242,6 +1242,7 @@ export interface PartnershipsPage {
   heroV2: {
     title: string;
     description: string;
+    banner?: (number | null) | Banner;
   };
   seo: {
     title: string;
@@ -1260,6 +1261,7 @@ export interface ConferencesPage {
   heroV2: {
     title: string;
     description: string;
+    banner?: (number | null) | Banner;
   };
   seo: {
     title: string;
@@ -1278,6 +1280,7 @@ export interface ServicesPage {
   heroV2: {
     title: string;
     description: string;
+    banner?: (number | null) | Banner;
   };
   seo: {
     title: string;
@@ -1296,6 +1299,7 @@ export interface JobsPage {
   heroV2: {
     title: string;
     description: string;
+    banner?: (number | null) | Banner;
   };
   seo: {
     title: string;
@@ -1314,6 +1318,7 @@ export interface ForumPage {
   heroV2: {
     title: string;
     description: string;
+    banner?: (number | null) | Banner;
   };
   seo: {
     title: string;
@@ -1399,6 +1404,7 @@ export interface PartnershipsPageSelect<T extends boolean = true> {
     | {
         title?: T;
         description?: T;
+        banner?: T;
       };
   seo?:
     | T
@@ -1421,6 +1427,7 @@ export interface ConferencesPageSelect<T extends boolean = true> {
     | {
         title?: T;
         description?: T;
+        banner?: T;
       };
   seo?:
     | T
@@ -1443,6 +1450,7 @@ export interface ServicesPageSelect<T extends boolean = true> {
     | {
         title?: T;
         description?: T;
+        banner?: T;
       };
   seo?:
     | T
@@ -1465,6 +1473,7 @@ export interface JobsPageSelect<T extends boolean = true> {
     | {
         title?: T;
         description?: T;
+        banner?: T;
       };
   seo?:
     | T
@@ -1487,6 +1496,7 @@ export interface ForumPageSelect<T extends boolean = true> {
     | {
         title?: T;
         description?: T;
+        banner?: T;
       };
   seo?:
     | T
