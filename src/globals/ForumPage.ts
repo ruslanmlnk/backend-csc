@@ -10,5 +10,15 @@ export const ForumPage: GlobalConfig = {
     read: () => true,
     update: async ({ req }) => isAdminRequest(req),
   },
-  fields: [heroV2Field, ...seoFields],
+  fields: [
+    heroV2Field,
+    {
+      name: 'sidebarBanner',
+      type: 'relationship',
+      relationTo: 'banners',
+      required: false,
+      label: 'Sidebar Banner',
+    },
+    ...seoFields,
+  ],
 }

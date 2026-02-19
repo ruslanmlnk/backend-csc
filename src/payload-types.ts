@@ -1320,6 +1320,7 @@ export interface ForumPage {
     description: string;
     banner?: (number | null) | Banner;
   };
+  sidebarBanner?: (number | null) | Banner;
   seo: {
     title: string;
     description: string;
@@ -1498,6 +1499,7 @@ export interface ForumPageSelect<T extends boolean = true> {
         description?: T;
         banner?: T;
       };
+  sidebarBanner?: T;
   seo?:
     | T
     | {
