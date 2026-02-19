@@ -231,6 +231,10 @@ export interface Banner {
   id: number;
   caption: string;
   image: number | Media;
+  /**
+   * Optional URL opened when users click this banner.
+   */
+  link?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -864,6 +868,7 @@ export interface MediaSelect<T extends boolean = true> {
 export interface BannersSelect<T extends boolean = true> {
   caption?: T;
   image?: T;
+  link?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1171,6 +1176,28 @@ export interface Home {
     primaryButtonLink: string;
     secondaryButtonLink: string;
   };
+  whatWeDo: {
+    badgeText: string;
+    title: string;
+    description: string;
+    /**
+     * Where the "Learn More" button should lead. Supports relative paths and full URLs.
+     */
+    buttonLink: string;
+  };
+  coreValues: {
+    badgeText: string;
+    title: string;
+    /**
+     * Editable Core Values cards shown on the home page.
+     */
+    cards: {
+      icon: number | Media;
+      title: string;
+      description: string;
+      id?: string | null;
+    }[];
+  };
   seo: {
     title: string;
     description: string;
@@ -1209,6 +1236,28 @@ export interface HomeSelect<T extends boolean = true> {
         valueProposition?: T;
         primaryButtonLink?: T;
         secondaryButtonLink?: T;
+      };
+  whatWeDo?:
+    | T
+    | {
+        badgeText?: T;
+        title?: T;
+        description?: T;
+        buttonLink?: T;
+      };
+  coreValues?:
+    | T
+    | {
+        badgeText?: T;
+        title?: T;
+        cards?:
+          | T
+          | {
+              icon?: T;
+              title?: T;
+              description?: T;
+              id?: T;
+            };
       };
   seo?:
     | T

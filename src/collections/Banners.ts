@@ -27,5 +27,15 @@ export const Banners: CollectionConfig = {
       required: true,
       label: 'Banner Image',
     },
+    {
+      name: 'link',
+      type: 'text',
+      required: false,
+      label: 'Banner Link',
+      admin: {
+        description: 'Optional URL opened when users click this banner.',
+        placeholder: 'https://example.com or /services',
+      },
+    },
   ],
 }
