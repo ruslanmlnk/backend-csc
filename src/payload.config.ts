@@ -9,6 +9,11 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Home } from './globals/Home'
 import { Blog } from './globals/Blog'
+import { PartnershipsPage } from './globals/PartnershipsPage'
+import { ConferencesPage } from './globals/ConferencesPage'
+import { ServicesPage } from './globals/ServicesPage'
+import { JobsPage } from './globals/JobsPage'
+import { ForumPage } from './globals/ForumPage'
 import { Articles } from './collections/Articles'
 import { Categories } from './collections/Categories'
 import { Banners } from './collections/Banners'
@@ -81,7 +86,7 @@ export default buildConfig({
   ],
   cors: allowedOrigins,
   csrf: allowedOrigins,
-  globals: [Home, Blog],
+  globals: [Home, Blog, PartnershipsPage, ConferencesPage, ServicesPage, JobsPage, ForumPage],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

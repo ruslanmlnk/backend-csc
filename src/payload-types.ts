@@ -126,10 +126,20 @@ export interface Config {
   globals: {
     home: Home;
     blog: Blog;
+    'partnerships-page': PartnershipsPage;
+    'conferences-page': ConferencesPage;
+    'services-page': ServicesPage;
+    'jobs-page': JobsPage;
+    'forum-page': ForumPage;
   };
   globalsSelect: {
     home: HomeSelect<false> | HomeSelect<true>;
     blog: BlogSelect<false> | BlogSelect<true>;
+    'partnerships-page': PartnershipsPageSelect<false> | PartnershipsPageSelect<true>;
+    'conferences-page': ConferencesPageSelect<false> | ConferencesPageSelect<true>;
+    'services-page': ServicesPageSelect<false> | ServicesPageSelect<true>;
+    'jobs-page': JobsPageSelect<false> | JobsPageSelect<true>;
+    'forum-page': ForumPageSelect<false> | ForumPageSelect<true>;
   };
   locale: null;
   user: User;
@@ -1225,6 +1235,96 @@ export interface Blog {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partnerships-page".
+ */
+export interface PartnershipsPage {
+  id: number;
+  heroV2: {
+    title: string;
+    description: string;
+  };
+  seo: {
+    title: string;
+    description: string;
+    ogImage?: (number | null) | Media;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "conferences-page".
+ */
+export interface ConferencesPage {
+  id: number;
+  heroV2: {
+    title: string;
+    description: string;
+  };
+  seo: {
+    title: string;
+    description: string;
+    ogImage?: (number | null) | Media;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services-page".
+ */
+export interface ServicesPage {
+  id: number;
+  heroV2: {
+    title: string;
+    description: string;
+  };
+  seo: {
+    title: string;
+    description: string;
+    ogImage?: (number | null) | Media;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "jobs-page".
+ */
+export interface JobsPage {
+  id: number;
+  heroV2: {
+    title: string;
+    description: string;
+  };
+  seo: {
+    title: string;
+    description: string;
+    ogImage?: (number | null) | Media;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "forum-page".
+ */
+export interface ForumPage {
+  id: number;
+  heroV2: {
+    title: string;
+    description: string;
+  };
+  seo: {
+    title: string;
+    description: string;
+    ogImage?: (number | null) | Media;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home_select".
  */
 export interface HomeSelect<T extends boolean = true> {
@@ -1278,6 +1378,116 @@ export interface BlogSelect<T extends boolean = true> {
   title?: T;
   description?: T;
   banner?: T;
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        ogImage?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partnerships-page_select".
+ */
+export interface PartnershipsPageSelect<T extends boolean = true> {
+  heroV2?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        ogImage?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "conferences-page_select".
+ */
+export interface ConferencesPageSelect<T extends boolean = true> {
+  heroV2?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        ogImage?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services-page_select".
+ */
+export interface ServicesPageSelect<T extends boolean = true> {
+  heroV2?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        ogImage?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "jobs-page_select".
+ */
+export interface JobsPageSelect<T extends boolean = true> {
+  heroV2?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        ogImage?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "forum-page_select".
+ */
+export interface ForumPageSelect<T extends boolean = true> {
+  heroV2?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
   seo?:
     | T
     | {
