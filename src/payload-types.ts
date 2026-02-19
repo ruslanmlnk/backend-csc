@@ -1161,6 +1161,16 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Home {
   id: number;
+  hero: {
+    title: string;
+    description: string;
+    /**
+     * Text for the top badge, for example: "Inferra - built on data, driven by profit".
+     */
+    valueProposition: string;
+    primaryButtonLink: string;
+    secondaryButtonLink: string;
+  };
   seo: {
     title: string;
     description: string;
@@ -1191,6 +1201,15 @@ export interface Blog {
  * via the `definition` "home_select".
  */
 export interface HomeSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        valueProposition?: T;
+        primaryButtonLink?: T;
+        secondaryButtonLink?: T;
+      };
   seo?:
     | T
     | {
