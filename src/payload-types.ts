@@ -1206,6 +1206,10 @@ export interface Home {
     primaryButtonLink: string;
     secondaryButtonLink: string;
   };
+  /**
+   * Banner shown at the bottom of the Hero section.
+   */
+  heroBanner?: (number | null) | Banner;
   whatWeDo: {
     badgeText: string;
     title: string;
@@ -1215,6 +1219,14 @@ export interface Home {
      */
     buttonLink: string;
   };
+  /**
+   * Banner shown right after the "Latest Post" block.
+   */
+  latestPostsBanner?: (number | null) | Banner;
+  /**
+   * Banner shown right after the "Partnerships Programs" block.
+   */
+  partnershipsProgramsBanner?: (number | null) | Banner;
   coreValues: {
     badgeText: string;
     title: string;
@@ -1385,6 +1397,7 @@ export interface HomeSelect<T extends boolean = true> {
         primaryButtonLink?: T;
         secondaryButtonLink?: T;
       };
+  heroBanner?: T;
   whatWeDo?:
     | T
     | {
@@ -1393,6 +1406,8 @@ export interface HomeSelect<T extends boolean = true> {
         description?: T;
         buttonLink?: T;
       };
+  latestPostsBanner?: T;
+  partnershipsProgramsBanner?: T;
   coreValues?:
     | T
     | {

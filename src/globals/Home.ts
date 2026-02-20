@@ -51,6 +51,16 @@ export const Home: GlobalConfig = {
       ],
     },
     {
+      name: 'heroBanner',
+      type: 'relationship',
+      relationTo: 'banners',
+      required: false,
+      label: 'Hero Bottom Banner',
+      admin: {
+        description: 'Banner shown at the bottom of the Hero section.',
+      },
+    },
+    {
       name: 'whatWeDo',
       type: 'group',
       label: 'What We Do Block',
@@ -88,6 +98,26 @@ export const Home: GlobalConfig = {
           },
         },
       ],
+    },
+    {
+      name: 'latestPostsBanner',
+      type: 'relationship',
+      relationTo: 'banners',
+      required: false,
+      label: 'Latest Posts Bottom Banner',
+      admin: {
+        description: 'Banner shown right after the "Latest Post" block.',
+      },
+    },
+    {
+      name: 'partnershipsProgramsBanner',
+      type: 'relationship',
+      relationTo: 'banners',
+      required: false,
+      label: 'Partnerships Programs Bottom Banner',
+      admin: {
+        description: 'Banner shown right after the "Partnerships Programs" block.',
+      },
     },
     {
       name: 'coreValues',
