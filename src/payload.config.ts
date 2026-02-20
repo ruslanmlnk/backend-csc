@@ -38,6 +38,34 @@ import { ForumSubCategories } from './collections/ForumSubCategories'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+const normalizeOrigin = (value: string | undefined): string | null => {
+  if (!value) return null
+
+  const trimmed = value.trim()
+  if (!trimmed) return null
+
+  try {
+    const withProtocol = /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`
+    return new URL(withProtocol).origin
+  } catch {
+    return null
+  }
+}
+
+const normalizeURL = (value: string | undefined): string | null => {
+  if (!value) return null
+
+  const trimmed = value.trim()
+  if (!trimmed) return null
+
+  try {
+    const withProtocol = /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`
+    return new URL(withProtocol).toString().replace(/\/$/, '')
+  } catch {
+    return null
+  }
+}
+
 const defaultAllowedOrigins = [
   'http://localhost:3000',
   'http://127.0.0.1:3000',
@@ -46,16 +74,36 @@ const defaultAllowedOrigins = [
   'https://heliometrical-welcomeless-angelina.ngrok-free.dev',
 ]
 
-const envAllowedOrigins = [
+const envOriginCandidates = [
+  process.env.SERVER_URL,
+  process.env.PAYLOAD_PUBLIC_SERVER_URL,
+  process.env.DEPLOY_URL,
+  process.env.URL,
   process.env.BACKEND_URL,
   process.env.NEXT_PUBLIC_BACKEND_URL,
   process.env.FRONTEND_URL,
   process.env.NEXT_PUBLIC_FRONTEND_URL,
+  process.env.RENDER_EXTERNAL_URL,
+  process.env.VERCEL_URL,
+  process.env.RAILWAY_PUBLIC_DOMAIN,
 ]
-  .filter(Boolean)
-  .map((origin) => origin!.replace(/\/$/, ''))
+
+const envAllowedOrigins = envOriginCandidates
+  .map((value) => normalizeOrigin(value))
+  .filter((origin): origin is string => Boolean(origin))
 
 const allowedOrigins = Array.from(new Set([...defaultAllowedOrigins, ...envAllowedOrigins]))
+const serverURL =
+  normalizeURL(process.env.SERVER_URL) ??
+  normalizeURL(process.env.PAYLOAD_PUBLIC_SERVER_URL) ??
+  normalizeURL(process.env.BACKEND_URL) ??
+  normalizeURL(process.env.NEXT_PUBLIC_BACKEND_URL) ??
+  normalizeURL(process.env.DEPLOY_URL) ??
+  normalizeURL(process.env.URL) ??
+  normalizeURL(process.env.RENDER_EXTERNAL_URL) ??
+  normalizeURL(process.env.VERCEL_URL) ??
+  normalizeURL(process.env.RAILWAY_PUBLIC_DOMAIN) ??
+  ''
 
 export default buildConfig({
   admin: {
@@ -86,6 +134,7 @@ export default buildConfig({
     Comments,
     Threads,
   ],
+  serverURL,
   cors: allowedOrigins,
   csrf: allowedOrigins,
   globals: [
