@@ -345,7 +345,10 @@ export interface Service {
    */
   handle?: string | null;
   mainImage?: (number | null) | Media;
-  sidebarImage?: (number | null) | Media;
+  /**
+   * Banner shown in the right sidebar on /services/[slug].
+   */
+  sidebarBanner?: (number | null) | Banner;
   promoCode?: string | null;
   promoDescription?: string | null;
   /**
@@ -426,7 +429,10 @@ export interface Partnership {
    * Used by the "Go to the website" button on detail page.
    */
   websiteUrl?: string | null;
-  sidebarImage?: (number | null) | Media;
+  /**
+   * Banner shown in the right sidebar on /partnerships/[slug].
+   */
+  sidebarBanner?: (number | null) | Banner;
   /**
    * Main rich text content rendered on /partnerships/[slug].
    */
@@ -484,7 +490,10 @@ export interface Conference {
    */
   websiteUrl?: string | null;
   mainImage?: (number | null) | Media;
-  sidebarImage?: (number | null) | Media;
+  /**
+   * Banner shown in the right sidebar on /conferences/[slug].
+   */
+  sidebarBanner?: (number | null) | Banner;
   /**
    * Main rich text content rendered on /conferences/[slug].
    */
@@ -570,9 +579,9 @@ export interface Job {
    */
   salaryInfo: string;
   /**
-   * Image shown in the right sidebar on /jobs/[slug].
+   * Banner shown in the right sidebar on /jobs/[slug].
    */
-  sidebarImage?: (number | null) | Media;
+  sidebarBanner?: (number | null) | Banner;
   /**
    * Main content for the job details page.
    */
@@ -944,7 +953,7 @@ export interface ServicesSelect<T extends boolean = true> {
   websiteUrl?: T;
   handle?: T;
   mainImage?: T;
-  sidebarImage?: T;
+  sidebarBanner?: T;
   promoCode?: T;
   promoDescription?: T;
   content?: T;
@@ -988,7 +997,7 @@ export interface PartnershipsSelect<T extends boolean = true> {
         id?: T;
       };
   websiteUrl?: T;
-  sidebarImage?: T;
+  sidebarBanner?: T;
   content?: T;
   status?: T;
   updatedAt?: T;
@@ -1008,7 +1017,7 @@ export interface ConferencesSelect<T extends boolean = true> {
   vertical?: T;
   websiteUrl?: T;
   mainImage?: T;
-  sidebarImage?: T;
+  sidebarBanner?: T;
   content?: T;
   status?: T;
   updatedAt?: T;
@@ -1067,7 +1076,7 @@ export interface JobsSelect<T extends boolean = true> {
   experience?: T;
   salary?: T;
   salaryInfo?: T;
-  sidebarImage?: T;
+  sidebarBanner?: T;
   content?: T;
   status?: T;
   updatedAt?: T;

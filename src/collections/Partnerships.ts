@@ -171,11 +171,14 @@ export const Partnerships: CollectionConfig = {
       },
     },
     {
-      name: 'sidebarImage',
-      type: 'upload',
-      relationTo: 'media',
+      name: 'sidebarBanner',
+      type: 'relationship',
+      relationTo: 'banners',
       required: false,
-      label: 'Sidebar Image',
+      label: 'SideBar Banner',
+      admin: {
+        description: 'Banner shown in the right sidebar on /partnerships/[slug].',
+      },
     },
     {
       name: 'content',
