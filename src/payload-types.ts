@@ -265,6 +265,10 @@ export interface Article {
   author: number | User;
   publishedDate: string;
   /**
+   * Banner shown in the right sidebar on /blog/[slug].
+   */
+  sidebarBanner?: (number | null) | Banner;
+  /**
    * Use the Banner block to insert a banner from the Banners collection by name.
    */
   content: {
@@ -907,6 +911,7 @@ export interface ArticlesSelect<T extends boolean = true> {
   category?: T;
   author?: T;
   publishedDate?: T;
+  sidebarBanner?: T;
   content?: T;
   tags?:
     | T
@@ -1239,7 +1244,7 @@ export interface Blog {
   id: number;
   title: string;
   description: string;
-  banner: number | Media;
+  banner?: (number | null) | Banner;
   seo: {
     title: string;
     description: string;

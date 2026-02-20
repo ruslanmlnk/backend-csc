@@ -70,6 +70,16 @@ export const Articles: CollectionConfig = {
             label: 'Published Date',
         },
         {
+            name: 'sidebarBanner',
+            type: 'relationship',
+            relationTo: 'banners',
+            required: false,
+            label: 'SideBar Banner',
+            admin: {
+                description: 'Banner shown in the right sidebar on /blog/[slug].',
+            },
+        },
+        {
             name: 'content',
             type: 'richText',
             required: true,
