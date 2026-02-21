@@ -155,5 +155,15 @@ export const Services: CollectionConfig = {
         position: 'sidebar',
       },
     },
+    {
+      name: 'noindex',
+      type: 'checkbox',
+      label: 'No Index',
+      defaultValue: false,
+      admin: {
+        position: 'sidebar',
+        description: 'If checked, this item will be hidden from search engines and sitemap.',
+      },
+    },
   ],
 }

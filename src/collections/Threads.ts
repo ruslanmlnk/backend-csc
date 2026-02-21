@@ -82,5 +82,15 @@ export const Threads: CollectionConfig = {
         position: 'sidebar',
       },
     },
+    {
+      name: 'noindex',
+      type: 'checkbox',
+      label: 'No Index',
+      defaultValue: false,
+      admin: {
+        position: 'sidebar',
+        description: 'If checked, this thread will be hidden from search engines and sitemap.',
+      },
+    },
   ],
 }

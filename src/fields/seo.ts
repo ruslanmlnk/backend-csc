@@ -24,6 +24,15 @@ export const seoFields: Field[] = [
         relationTo: 'media',
         label: 'Open Graph Image',
       },
+      {
+        name: 'noindex',
+        type: 'checkbox',
+        label: 'No Index',
+        defaultValue: false,
+        admin: {
+          description: 'If checked, this page will be hidden from search engines and sitemap.',
+        },
+      },
     ],
   },
 ]

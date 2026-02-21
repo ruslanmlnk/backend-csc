@@ -297,6 +297,10 @@ export interface Article {
    */
   relatedArticles?: (number | Article)[] | null;
   status?: ('draft' | 'published') | null;
+  /**
+   * If checked, this item will be hidden from search engines and sitemap.
+   */
+  noindex?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -374,6 +378,10 @@ export interface Service {
     [k: string]: unknown;
   };
   status?: ('draft' | 'published') | null;
+  /**
+   * If checked, this item will be hidden from search engines and sitemap.
+   */
+  noindex?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -456,6 +464,10 @@ export interface Partnership {
     [k: string]: unknown;
   };
   status?: ('draft' | 'published') | null;
+  /**
+   * If checked, this item will be hidden from search engines and sitemap.
+   */
+  noindex?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -517,6 +529,10 @@ export interface Conference {
     [k: string]: unknown;
   };
   status?: ('draft' | 'published') | null;
+  /**
+   * If checked, this item will be hidden from search engines and sitemap.
+   */
+  noindex?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -605,6 +621,10 @@ export interface Job {
     [k: string]: unknown;
   };
   status?: ('draft' | 'published') | null;
+  /**
+   * If checked, this item will be hidden from search engines and sitemap.
+   */
+  noindex?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -673,6 +693,10 @@ export interface Thread {
   tags?: string[] | null;
   content: string;
   author: number | User;
+  /**
+   * If checked, this thread will be hidden from search engines and sitemap.
+   */
+  noindex?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -921,6 +945,7 @@ export interface ArticlesSelect<T extends boolean = true> {
       };
   relatedArticles?: T;
   status?: T;
+  noindex?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -963,6 +988,7 @@ export interface ServicesSelect<T extends boolean = true> {
   promoDescription?: T;
   content?: T;
   status?: T;
+  noindex?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1005,6 +1031,7 @@ export interface PartnershipsSelect<T extends boolean = true> {
   sidebarBanner?: T;
   content?: T;
   status?: T;
+  noindex?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1025,6 +1052,7 @@ export interface ConferencesSelect<T extends boolean = true> {
   sidebarBanner?: T;
   content?: T;
   status?: T;
+  noindex?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1084,6 +1112,7 @@ export interface JobsSelect<T extends boolean = true> {
   sidebarBanner?: T;
   content?: T;
   status?: T;
+  noindex?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1147,6 +1176,7 @@ export interface ThreadsSelect<T extends boolean = true> {
   tags?: T;
   content?: T;
   author?: T;
+  noindex?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1244,6 +1274,10 @@ export interface Home {
     title: string;
     description: string;
     ogImage?: (number | null) | Media;
+    /**
+     * If checked, this page will be hidden from search engines and sitemap.
+     */
+    noindex?: boolean | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1261,6 +1295,10 @@ export interface Blog {
     title: string;
     description: string;
     ogImage?: (number | null) | Media;
+    /**
+     * If checked, this page will be hidden from search engines and sitemap.
+     */
+    noindex?: boolean | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1280,6 +1318,10 @@ export interface PartnershipsPage {
     title: string;
     description: string;
     ogImage?: (number | null) | Media;
+    /**
+     * If checked, this page will be hidden from search engines and sitemap.
+     */
+    noindex?: boolean | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1299,6 +1341,10 @@ export interface ConferencesPage {
     title: string;
     description: string;
     ogImage?: (number | null) | Media;
+    /**
+     * If checked, this page will be hidden from search engines and sitemap.
+     */
+    noindex?: boolean | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1318,6 +1364,10 @@ export interface ServicesPage {
     title: string;
     description: string;
     ogImage?: (number | null) | Media;
+    /**
+     * If checked, this page will be hidden from search engines and sitemap.
+     */
+    noindex?: boolean | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1337,6 +1387,10 @@ export interface JobsPage {
     title: string;
     description: string;
     ogImage?: (number | null) | Media;
+    /**
+     * If checked, this page will be hidden from search engines and sitemap.
+     */
+    noindex?: boolean | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1357,6 +1411,10 @@ export interface ForumPage {
     title: string;
     description: string;
     ogImage?: (number | null) | Media;
+    /**
+     * If checked, this page will be hidden from search engines and sitemap.
+     */
+    noindex?: boolean | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1428,6 +1486,7 @@ export interface HomeSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         ogImage?: T;
+        noindex?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1447,6 +1506,7 @@ export interface BlogSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         ogImage?: T;
+        noindex?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1470,6 +1530,7 @@ export interface PartnershipsPageSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         ogImage?: T;
+        noindex?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1493,6 +1554,7 @@ export interface ConferencesPageSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         ogImage?: T;
+        noindex?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1516,6 +1578,7 @@ export interface ServicesPageSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         ogImage?: T;
+        noindex?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1539,6 +1602,7 @@ export interface JobsPageSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         ogImage?: T;
+        noindex?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1563,6 +1627,7 @@ export interface ForumPageSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         ogImage?: T;
+        noindex?: T;
       };
   updatedAt?: T;
   createdAt?: T;
