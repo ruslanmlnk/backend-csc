@@ -133,6 +133,7 @@ export interface Config {
     'forum-page': ForumPage;
     'login-page': LoginPage;
     'register-page': RegisterPage;
+    profile: Profile;
   };
   globalsSelect: {
     home: HomeSelect<false> | HomeSelect<true>;
@@ -144,6 +145,7 @@ export interface Config {
     'forum-page': ForumPageSelect<false> | ForumPageSelect<true>;
     'login-page': LoginPageSelect<false> | LoginPageSelect<true>;
     'register-page': RegisterPageSelect<false> | RegisterPageSelect<true>;
+    profile: ProfileSelect<false> | ProfileSelect<true>;
   };
   locale: null;
   user: User;
@@ -1455,6 +1457,16 @@ export interface RegisterPage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "profile".
+ */
+export interface Profile {
+  id: number;
+  banner?: (number | null) | Banner;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home_select".
  */
 export interface HomeSelect<T extends boolean = true> {
@@ -1672,6 +1684,16 @@ export interface LoginPageSelect<T extends boolean = true> {
 export interface RegisterPageSelect<T extends boolean = true> {
   leftBanner?: T;
   rightBanner?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "profile_select".
+ */
+export interface ProfileSelect<T extends boolean = true> {
+  banner?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

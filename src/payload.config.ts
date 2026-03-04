@@ -16,6 +16,7 @@ import { JobsPage } from './globals/JobsPage'
 import { ForumPage } from './globals/ForumPage'
 import { LoginPage } from './globals/LoginPage'
 import { RegisterPage } from './globals/RegisterPage'
+import { Profile } from './globals/Profile'
 import { Articles } from './collections/Articles'
 import { Categories } from './collections/Categories'
 import { Banners } from './collections/Banners'
@@ -147,6 +148,7 @@ export default buildConfig({
     ForumPage,
     LoginPage,
     RegisterPage,
+    Profile,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
