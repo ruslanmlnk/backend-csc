@@ -2,6 +2,7 @@ import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
 import type { Block, CollectionConfig } from 'payload'
 import { slugField } from '../fields/slug'
 import { isAdminRequest } from '../access/isAdmin'
+import { seoFields } from '../fields/seo'
 
 const articleBannerBlock: Block = {
     slug: 'banner',
@@ -47,6 +48,16 @@ export const Articles: CollectionConfig = {
             relationTo: 'media',
             required: true,
             label: 'Main Image',
+        },
+        {
+            name: 'cardPoster',
+            type: 'upload',
+            relationTo: 'media',
+            required: false,
+            label: 'Card Poster',
+            admin: {
+                description: 'Image used in article cards across blog lists, related articles, and search results.',
+            },
         },
         {
             name: 'category',
@@ -137,15 +148,6 @@ export const Articles: CollectionConfig = {
                 position: 'sidebar',
             },
         },
-        {
-            name: 'noindex',
-            type: 'checkbox',
-            label: 'No Index',
-            defaultValue: false,
-            admin: {
-                position: 'sidebar',
-                description: 'If checked, this item will be hidden from search engines and sitemap.',
-            },
-        },
+        ...seoFields,
     ],
 }

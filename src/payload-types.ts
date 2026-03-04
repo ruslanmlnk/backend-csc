@@ -263,6 +263,10 @@ export interface Article {
   title: string;
   slug?: string | null;
   image: number | Media;
+  /**
+   * Image used in article cards across blog lists, related articles, and search results.
+   */
+  cardPoster?: (number | null) | Media;
   category: number | Category;
   author: number | User;
   publishedDate: string;
@@ -299,10 +303,15 @@ export interface Article {
    */
   relatedArticles?: (number | Article)[] | null;
   status?: ('draft' | 'published') | null;
-  /**
-   * If checked, this item will be hidden from search engines and sitemap.
-   */
-  noindex?: boolean | null;
+  seo: {
+    title: string;
+    description: string;
+    ogImage?: (number | null) | Media;
+    /**
+     * If checked, this page will be hidden from search engines and sitemap.
+     */
+    noindex?: boolean | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -938,6 +947,7 @@ export interface ArticlesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   image?: T;
+  cardPoster?: T;
   category?: T;
   author?: T;
   publishedDate?: T;
@@ -951,7 +961,14 @@ export interface ArticlesSelect<T extends boolean = true> {
       };
   relatedArticles?: T;
   status?: T;
-  noindex?: T;
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        ogImage?: T;
+        noindex?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
