@@ -271,6 +271,10 @@ export interface Article {
   author: number | User;
   publishedDate: string;
   /**
+   * Automatically increments when an article page is opened.
+   */
+  views: number;
+  /**
    * Banner shown in the right sidebar on /blog/[slug].
    */
   sidebarBanner?: (number | null) | Banner;
@@ -951,6 +955,7 @@ export interface ArticlesSelect<T extends boolean = true> {
   category?: T;
   author?: T;
   publishedDate?: T;
+  views?: T;
   sidebarBanner?: T;
   content?: T;
   tags?:

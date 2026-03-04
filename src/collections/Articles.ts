@@ -1,5 +1,5 @@
 import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
-import type { Block, CollectionConfig } from 'payload'
+import type { Block, CollectionConfig, PayloadRequest } from 'payload'
 import { slugField } from '../fields/slug'
 import { isAdminRequest } from '../access/isAdmin'
 import { seoFields } from '../fields/seo'
@@ -22,12 +22,79 @@ const articleBannerBlock: Block = {
     ],
 }
 
+const toNonNegativeInteger = (value: unknown): number => {
+    if (typeof value === 'number' && Number.isFinite(value)) {
+        return Math.max(0, Math.floor(value))
+    }
+
+    if (typeof value === 'string' && value.trim()) {
+        const parsed = Number(value)
+        if (Number.isFinite(parsed)) {
+            return Math.max(0, Math.floor(parsed))
+        }
+    }
+
+    return 0
+}
+
+const incrementArticleViews = async (req: PayloadRequest): Promise<Response> => {
+    try {
+        const slug = req.routeParams?.slug
+
+        if (!slug || typeof slug !== 'string') {
+            return Response.json({ error: 'Article slug is required.' }, { status: 400 })
+        }
+
+        const articleResult = await req.payload.find({
+            collection: 'articles',
+            where: {
+                slug: {
+                    equals: slug,
+                },
+            },
+            limit: 1,
+            depth: 0,
+        })
+
+        const article = articleResult.docs[0]
+        if (!article) {
+            return Response.json({ error: 'Article not found.' }, { status: 404 })
+        }
+
+        const currentViews = toNonNegativeInteger(article.views)
+        const nextViews = currentViews + 1
+
+        await req.payload.update({
+            collection: 'articles',
+            id: article.id,
+            data: {
+                views: nextViews,
+            },
+            depth: 0,
+            req,
+            overrideAccess: true,
+        })
+
+        return Response.json({ views: nextViews }, { status: 200 })
+    } catch (error) {
+        req.payload.logger.error(error, 'Failed to increment article views')
+        return Response.json({ error: 'Unable to update article views.' }, { status: 500 })
+    }
+}
+
 export const Articles: CollectionConfig = {
     slug: 'articles',
     admin: {
         useAsTitle: 'title',
         defaultColumns: ['title', 'category', 'author', 'status'],
     },
+    endpoints: [
+        {
+            path: '/:slug/view',
+            method: 'post',
+            handler: incrementArticleViews,
+        },
+    ],
     access: {
         read: () => true,
         create: async ({ req }) => isAdminRequest(req),
@@ -79,6 +146,18 @@ export const Articles: CollectionConfig = {
             required: true,
             defaultValue: () => new Date(),
             label: 'Published Date',
+        },
+        {
+            name: 'views',
+            type: 'number',
+            label: 'Views',
+            required: true,
+            defaultValue: 0,
+            admin: {
+                position: 'sidebar',
+                readOnly: true,
+                description: 'Automatically increments when an article page is opened.',
+            },
         },
         {
             name: 'sidebarBanner',
