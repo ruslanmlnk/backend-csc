@@ -690,6 +690,10 @@ export interface Thread {
   title: string;
   category: number | ForumSubCategory;
   isLocked?: boolean | null;
+  /**
+   * Higher value means higher position in thread lists.
+   */
+  orderId?: number | null;
   tags?: string[] | null;
   content: string;
   author: number | User;
@@ -1173,6 +1177,7 @@ export interface ThreadsSelect<T extends boolean = true> {
   title?: T;
   category?: T;
   isLocked?: T;
+  orderId?: T;
   tags?: T;
   content?: T;
   author?: T;
@@ -1269,6 +1274,13 @@ export interface Home {
       description: string;
       id?: string | null;
     }[];
+  };
+  contactForm: {
+    title: string;
+    description: string;
+    phone: string;
+    email: string;
+    address: string;
   };
   seo: {
     title: string;
@@ -1479,6 +1491,15 @@ export interface HomeSelect<T extends boolean = true> {
               description?: T;
               id?: T;
             };
+      };
+  contactForm?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        phone?: T;
+        email?: T;
+        address?: T;
       };
   seo?:
     | T

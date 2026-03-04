@@ -25,7 +25,7 @@ export const Threads: CollectionConfig = {
   slug: 'threads',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'category', 'isLocked', 'author', 'createdAt'],
+    defaultColumns: ['title', 'orderId', 'category', 'isLocked', 'author', 'createdAt'],
   },
   access: {
     read: () => true,
@@ -58,6 +58,17 @@ export const Threads: CollectionConfig = {
       defaultValue: false,
       admin: {
         position: 'sidebar',
+      },
+    },
+    {
+      name: 'orderId',
+      type: 'number',
+      label: 'Order Id',
+      defaultValue: 0,
+      index: true,
+      admin: {
+        position: 'sidebar',
+        description: 'Higher value means higher position in thread lists.',
       },
     },
     {

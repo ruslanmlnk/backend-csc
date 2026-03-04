@@ -171,6 +171,48 @@ export const Home: GlobalConfig = {
         },
       ],
     },
+    {
+      name: 'contactForm',
+      type: 'group',
+      label: 'Contact Form Block',
+      fields: [
+        {
+          name: 'title',
+          type: 'text',
+          required: true,
+          label: 'Title',
+          defaultValue: 'Connect with Us Today',
+        },
+        {
+          name: 'description',
+          type: 'textarea',
+          required: true,
+          label: 'Description',
+          defaultValue: 'Our team is here to help you with any inquiries about our services and features.',
+        },
+        {
+          name: 'phone',
+          type: 'text',
+          required: true,
+          label: 'Phone',
+          defaultValue: '+1 (800) 555-0199',
+        },
+        {
+          name: 'email',
+          type: 'text',
+          required: true,
+          label: 'E-mail',
+          defaultValue: 'support@coinzy.com',
+        },
+        {
+          name: 'address',
+          type: 'text',
+          required: true,
+          label: 'Address',
+          defaultValue: '123 Blockchain Ave, Crypto City, CC 10101',
+        },
+      ],
+    },
     ...seoFields,
   ],
 }
