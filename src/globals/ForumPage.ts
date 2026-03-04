@@ -19,6 +19,17 @@ export const ForumPage: GlobalConfig = {
       required: false,
       label: 'Sidebar Banner',
     },
+    {
+      name: 'pins',
+      type: 'relationship',
+      relationTo: 'threads',
+      hasMany: true,
+      required: false,
+      label: 'Popular Threads (Pins)',
+      admin: {
+        description: 'Threads shown in the Popular threads sidebar, in this exact order.',
+      },
+    },
     ...seoFields,
   ],
 }

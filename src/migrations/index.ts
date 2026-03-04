@@ -7,6 +7,7 @@ import * as migration_20260301_162109_add_threads_order_id from './20260301_1621
 import * as migration_20260304_120000_add_profile_global_banner from './20260304_120000_add_profile_global_banner';
 import * as migration_20260305_000100_add_articles_seo_and_card_poster from './20260305_000100_add_articles_seo_and_card_poster';
 import * as migration_20260305_001300_add_articles_views_counter from './20260305_001300_add_articles_views_counter';
+import * as migration_20260305_002100_add_forum_page_pins from './20260305_002100_add_forum_page_pins';
 
 export const migrations = [
   {
@@ -53,5 +54,10 @@ export const migrations = [
     up: migration_20260305_001300_add_articles_views_counter.up,
     down: migration_20260305_001300_add_articles_views_counter.down,
     name: '20260305_001300_add_articles_views_counter'
+  },
+  {
+    up: migration_20260305_002100_add_forum_page_pins.up,
+    down: migration_20260305_002100_add_forum_page_pins.down,
+    name: '20260305_002100_add_forum_page_pins'
   },
 ];

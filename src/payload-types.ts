@@ -1443,6 +1443,10 @@ export interface ForumPage {
     banner?: (number | null) | Banner;
   };
   sidebarBanner?: (number | null) | Banner;
+  /**
+   * Threads shown in the Popular threads sidebar, in this exact order.
+   */
+  pins?: (number | Thread)[] | null;
   seo: {
     title: string;
     description: string;
@@ -1676,6 +1680,7 @@ export interface ForumPageSelect<T extends boolean = true> {
         banner?: T;
       };
   sidebarBanner?: T;
+  pins?: T;
   seo?:
     | T
     | {
