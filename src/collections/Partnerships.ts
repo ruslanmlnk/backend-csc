@@ -34,6 +34,7 @@ const partnershipPayoutsBlock: Block = {
       type: 'text',
       required: true,
       label: 'Frequency',
+      localized: true,
       admin: {
         placeholder: 'Once a day',
       },
@@ -43,6 +44,7 @@ const partnershipPayoutsBlock: Block = {
       type: 'text',
       required: true,
       label: 'Currency',
+      localized: true,
       admin: {
         placeholder: 'USD',
       },
@@ -52,6 +54,7 @@ const partnershipPayoutsBlock: Block = {
       type: 'text',
       required: true,
       label: 'Minimum Amount',
+      localized: true,
       admin: {
         placeholder: '$100',
       },
@@ -77,6 +80,7 @@ export const Partnerships: CollectionConfig = {
       type: 'text',
       required: true,
       label: 'Program Name',
+      localized: true,
     },
     slugField(),
     {
@@ -135,6 +139,7 @@ export const Partnerships: CollectionConfig = {
           type: 'text',
           required: true,
           label: 'Model',
+          localized: true,
         },
       ],
     },
@@ -143,6 +148,7 @@ export const Partnerships: CollectionConfig = {
       type: 'text',
       required: true,
       label: 'Minimum Payment',
+      localized: true,
       admin: {
         description: 'Example: $100',
       },
@@ -158,6 +164,7 @@ export const Partnerships: CollectionConfig = {
           type: 'text',
           required: true,
           label: 'Vertical',
+          localized: true,
         },
       ],
     },
@@ -185,6 +192,7 @@ export const Partnerships: CollectionConfig = {
       type: 'richText',
       required: true,
       label: 'Partnership Content',
+      localized: true,
       editor: lexicalEditor({
         features: ({ defaultFeatures }) => [
           ...defaultFeatures,

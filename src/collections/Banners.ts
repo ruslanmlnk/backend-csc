@@ -19,6 +19,7 @@ export const Banners: CollectionConfig = {
       type: 'text',
       required: true,
       label: 'Banner Name',
+      localized: true,
     },
     {
       name: 'image',

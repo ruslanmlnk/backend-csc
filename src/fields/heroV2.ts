@@ -10,12 +10,14 @@ export const heroV2Field: Field = {
       type: 'text',
       required: true,
       label: 'Title',
+      localized: true,
     },
     {
       name: 'description',
       type: 'textarea',
       required: true,
       label: 'Description',
+      localized: true,
     },
     {
       name: 'banner',

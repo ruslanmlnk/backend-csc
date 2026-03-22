@@ -122,7 +122,7 @@ export interface Config {
   db: {
     defaultIDType: number;
   };
-  fallbackLocale: null;
+  fallbackLocale: ('false' | 'none' | 'null') | false | null | ('en' | 'uk') | ('en' | 'uk')[];
   globals: {
     home: Home;
     blog: Blog;
@@ -147,7 +147,7 @@ export interface Config {
     'register-page': RegisterPageSelect<false> | RegisterPageSelect<true>;
     profile: ProfileSelect<false> | ProfileSelect<true>;
   };
-  locale: null;
+  locale: 'en' | 'uk';
   user: User;
   jobs: {
     tasks: unknown;
@@ -692,6 +692,9 @@ export interface Comment {
   id: number;
   user: number | User;
   thread: number | Thread;
+  /**
+   * Supports formatting, links, and image uploads inside forum comments.
+   */
   comment: {
     root: {
       type: string;
@@ -724,6 +727,9 @@ export interface Thread {
    */
   orderId?: number | null;
   tags?: string[] | null;
+  /**
+   * Supports formatting, links, and image uploads inside forum threads.
+   */
   content: {
     root: {
       type: string;
@@ -1354,6 +1360,9 @@ export interface Blog {
   id: number;
   title: string;
   description: string;
+  /**
+   * Banner shown below the hero heading on the blog page.
+   */
   horizontalBanner?: (number | null) | Banner;
   banner?: (number | null) | Banner;
   seo: {

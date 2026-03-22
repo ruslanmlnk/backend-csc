@@ -19,6 +19,7 @@ export const PartnershipCategories: CollectionConfig = {
       type: 'text',
       required: true,
       label: 'Name',
+      localized: true,
     },
     slugField('name'),
   ],

@@ -39,6 +39,7 @@ export const Services: CollectionConfig = {
       type: 'text',
       required: true,
       label: 'Title',
+      localized: true,
     },
     slugField(),
     {
@@ -60,6 +61,7 @@ export const Services: CollectionConfig = {
       type: 'textarea',
       required: true,
       label: 'Card Description',
+      localized: true,
       admin: {
         description: 'Short description displayed in cards on /services.',
       },
@@ -69,6 +71,7 @@ export const Services: CollectionConfig = {
       type: 'text',
       required: true,
       label: 'Price Label',
+      localized: true,
       admin: {
         description: 'Example: $ 10 /week, 28 /month',
       },
@@ -119,12 +122,14 @@ export const Services: CollectionConfig = {
       type: 'textarea',
       required: false,
       label: 'Promo Description',
+      localized: true,
     },
     {
       name: 'content',
       type: 'richText',
       required: true,
       label: 'Service Content',
+      localized: true,
       editor: lexicalEditor({
         features: ({ defaultFeatures }) => [
           ...defaultFeatures,

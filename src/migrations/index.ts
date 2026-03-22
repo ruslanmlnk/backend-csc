@@ -10,6 +10,7 @@ import * as migration_20260305_001300_add_articles_views_counter from './2026030
 import * as migration_20260305_002100_add_forum_page_pins from './20260305_002100_add_forum_page_pins';
 import * as migration_20260322_060000_add_blog_horizontal_banner from './20260322_060000_add_blog_horizontal_banner';
 import * as migration_20260322_070000_convert_forum_text_to_lexical from './20260322_070000_convert_forum_text_to_lexical';
+import * as migration_20260322_084046_add_localization_support from './20260322_084046_add_localization_support';
 
 export const migrations = [
   {
@@ -40,36 +41,41 @@ export const migrations = [
   {
     up: migration_20260301_162109_add_threads_order_id.up,
     down: migration_20260301_162109_add_threads_order_id.down,
-    name: '20260301_162109_add_threads_order_id'
+    name: '20260301_162109_add_threads_order_id',
   },
   {
     up: migration_20260304_120000_add_profile_global_banner.up,
     down: migration_20260304_120000_add_profile_global_banner.down,
-    name: '20260304_120000_add_profile_global_banner'
+    name: '20260304_120000_add_profile_global_banner',
   },
   {
     up: migration_20260305_000100_add_articles_seo_and_card_poster.up,
     down: migration_20260305_000100_add_articles_seo_and_card_poster.down,
-    name: '20260305_000100_add_articles_seo_and_card_poster'
+    name: '20260305_000100_add_articles_seo_and_card_poster',
   },
   {
     up: migration_20260305_001300_add_articles_views_counter.up,
     down: migration_20260305_001300_add_articles_views_counter.down,
-    name: '20260305_001300_add_articles_views_counter'
+    name: '20260305_001300_add_articles_views_counter',
   },
   {
     up: migration_20260305_002100_add_forum_page_pins.up,
     down: migration_20260305_002100_add_forum_page_pins.down,
-    name: '20260305_002100_add_forum_page_pins'
+    name: '20260305_002100_add_forum_page_pins',
   },
   {
     up: migration_20260322_060000_add_blog_horizontal_banner.up,
     down: migration_20260322_060000_add_blog_horizontal_banner.down,
-    name: '20260322_060000_add_blog_horizontal_banner'
+    name: '20260322_060000_add_blog_horizontal_banner',
   },
   {
     up: migration_20260322_070000_convert_forum_text_to_lexical.up,
     down: migration_20260322_070000_convert_forum_text_to_lexical.down,
-    name: '20260322_070000_convert_forum_text_to_lexical'
+    name: '20260322_070000_convert_forum_text_to_lexical',
+  },
+  {
+    up: migration_20260322_084046_add_localization_support.up,
+    down: migration_20260322_084046_add_localization_support.down,
+    name: '20260322_084046_add_localization_support'
   },
 ];

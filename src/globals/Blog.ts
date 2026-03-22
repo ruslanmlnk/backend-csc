@@ -15,12 +15,14 @@ export const Blog: GlobalConfig = {
             type: 'text',
             required: true,
             label: 'Hero Title',
+            localized: true,
         },
         {
             name: 'description',
             type: 'textarea',
             required: true,
             label: 'Hero Description',
+            localized: true,
         },
         {
             name: 'horizontalBanner',

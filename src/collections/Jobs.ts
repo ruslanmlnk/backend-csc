@@ -41,6 +41,7 @@ const jobContactBlock: Block = {
       type: 'text',
       required: true,
       label: 'Contact',
+      localized: true,
     },
   ],
 }
@@ -63,6 +64,7 @@ export const Jobs: CollectionConfig = {
       type: 'text',
       required: true,
       label: 'Title',
+      localized: true,
     },
     slugField(),
     {
@@ -121,6 +123,7 @@ export const Jobs: CollectionConfig = {
       type: 'text',
       required: true,
       label: 'Salary',
+      localized: true,
       admin: {
         description: 'Example: from 1000 USD, after the interview.',
       },
@@ -130,6 +133,7 @@ export const Jobs: CollectionConfig = {
       type: 'text',
       required: true,
       label: 'Salary Info',
+      localized: true,
       admin: {
         description: 'Example: Kyiv, Ukraine, Remote.',
       },
@@ -149,6 +153,7 @@ export const Jobs: CollectionConfig = {
       type: 'richText',
       required: true,
       label: 'Job Content',
+      localized: true,
       editor: lexicalEditor({
         features: ({ defaultFeatures }) => [
           ...defaultFeatures,

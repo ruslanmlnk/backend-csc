@@ -107,6 +107,7 @@ export const Articles: CollectionConfig = {
             type: 'text',
             required: true,
             label: 'Title',
+            localized: true,
         },
         slugField(),
         {
@@ -174,6 +175,7 @@ export const Articles: CollectionConfig = {
             type: 'richText',
             required: true,
             label: 'Article Content',
+            localized: true,
             editor: lexicalEditor({
                 features: ({ defaultFeatures }) => [
                     ...defaultFeatures,
@@ -195,6 +197,7 @@ export const Articles: CollectionConfig = {
                 {
                     name: 'tag',
                     type: 'text',
+                    localized: true,
                 },
             ],
         },

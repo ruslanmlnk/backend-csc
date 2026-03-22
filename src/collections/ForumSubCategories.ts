@@ -20,18 +20,21 @@ export const ForumSubCategories: CollectionConfig = {
       type: 'text',
       required: true,
       label: 'Name',
+      localized: true,
     },
     {
       name: 'description',
       type: 'text',
       required: true,
       label: 'Description',
+      localized: true,
     },
     {
       name: 'textAboveDate',
       type: 'text',
       required: true,
       label: 'Text Above Date',
+      localized: true,
     },
     {
       name: 'date',

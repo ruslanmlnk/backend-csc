@@ -20,18 +20,21 @@ export const Home: GlobalConfig = {
           type: 'text',
           required: true,
           label: 'Title',
+          localized: true,
         },
         {
           name: 'description',
           type: 'textarea',
           required: true,
           label: 'Description',
+          localized: true,
         },
         {
           name: 'valueProposition',
           type: 'text',
           required: true,
           label: 'Value Proposition',
+          localized: true,
           admin: {
             description: 'Text for the top badge, for example: "Inferra - built on data, driven by profit".',
           },
@@ -70,6 +73,7 @@ export const Home: GlobalConfig = {
           type: 'text',
           required: true,
           label: 'Badge Text',
+          localized: true,
           defaultValue: 'What we do',
         },
         {
@@ -77,6 +81,7 @@ export const Home: GlobalConfig = {
           type: 'text',
           required: true,
           label: 'Title',
+          localized: true,
           defaultValue: 'Performance marketing built on data',
         },
         {
@@ -84,6 +89,7 @@ export const Home: GlobalConfig = {
           type: 'textarea',
           required: true,
           label: 'Description',
+          localized: true,
           defaultValue:
             'ClickStorm is a performance-driven agency working at the intersection of traffic arbitrage, CPA marketing, and analytics. We launch, test, and scale traffic across multiple sources while keeping full control over metrics, budgets, and profitability.',
         },
@@ -129,6 +135,7 @@ export const Home: GlobalConfig = {
           type: 'text',
           required: true,
           label: 'Badge Text',
+          localized: true,
           defaultValue: 'Core Values',
         },
         {
@@ -136,6 +143,7 @@ export const Home: GlobalConfig = {
           type: 'text',
           required: true,
           label: 'Title',
+          localized: true,
           defaultValue: 'The Values that Drive Everything We Do',
         },
         {
@@ -157,12 +165,14 @@ export const Home: GlobalConfig = {
               type: 'text',
               required: true,
               label: 'Title',
+              localized: true,
             },
             {
               name: 'description',
               type: 'textarea',
               required: true,
               label: 'Description',
+              localized: true,
             },
           ],
           admin: {
@@ -181,6 +191,7 @@ export const Home: GlobalConfig = {
           type: 'text',
           required: true,
           label: 'Title',
+          localized: true,
           defaultValue: 'Connect with Us Today',
         },
         {
@@ -188,6 +199,7 @@ export const Home: GlobalConfig = {
           type: 'textarea',
           required: true,
           label: 'Description',
+          localized: true,
           defaultValue: 'Our team is here to help you with any inquiries about our services and features.',
         },
         {
@@ -209,6 +221,7 @@ export const Home: GlobalConfig = {
           type: 'text',
           required: true,
           label: 'Address',
+          localized: true,
           defaultValue: '123 Blockchain Ave, Crypto City, CC 10101',
         },
       ],

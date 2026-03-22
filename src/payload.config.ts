@@ -150,6 +150,20 @@ export default buildConfig({
     RegisterPage,
     Profile,
   ],
+  localization: {
+    locales: [
+      {
+        label: 'English',
+        code: 'en',
+      },
+      {
+        label: 'Ukrainian',
+        code: 'uk',
+      },
+    ],
+    defaultLocale: 'en',
+    fallback: true,
+  },
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

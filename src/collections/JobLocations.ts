@@ -19,6 +19,7 @@ export const JobLocations: CollectionConfig = {
       type: 'text',
       required: true,
       label: 'Name',
+      localized: true,
     },
     slugField('name'),
   ],

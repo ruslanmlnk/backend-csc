@@ -11,12 +11,14 @@ export const seoFields: Field[] = [
         type: 'text',
         required: true,
         label: 'Meta Title',
+        localized: true,
       },
       {
         name: 'description',
         type: 'textarea',
         required: true,
         label: 'Meta Description',
+        localized: true,
       },
       {
         name: 'ogImage',

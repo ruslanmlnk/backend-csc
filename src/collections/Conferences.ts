@@ -53,6 +53,7 @@ export const Conferences: CollectionConfig = {
       type: 'text',
       required: true,
       label: 'Title',
+      localized: true,
     },
     slugField(),
     {
@@ -68,6 +69,7 @@ export const Conferences: CollectionConfig = {
       required: false,
       defaultValue: '',
       label: 'Card Description',
+      localized: true,
       admin: {
         hidden: true,
       },
@@ -134,6 +136,7 @@ export const Conferences: CollectionConfig = {
       type: 'richText',
       required: true,
       label: 'Conference Content',
+      localized: true,
       editor: lexicalEditor({
         features: ({ defaultFeatures }) => [
           ...defaultFeatures,
