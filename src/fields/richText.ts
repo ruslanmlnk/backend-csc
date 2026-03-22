@@ -1,0 +1,130 @@
+type UnknownRecord = Record<string, unknown>
+
+export type LexicalRichTextValue = {
+  root: {
+    type: 'root'
+    children: Array<{
+      type: 'paragraph'
+      children: Array<
+        | {
+            type: 'text'
+            detail: number
+            format: number
+            mode: 'normal'
+            style: string
+            text: string
+            version: 1
+          }
+        | {
+            type: 'linebreak'
+            version: 1
+          }
+      >
+      direction: null
+      format: ''
+      indent: 0
+      textFormat: 0
+      textStyle: ''
+      version: 1
+    }>
+    direction: null
+    format: ''
+    indent: 0
+    version: 1
+  }
+}
+
+const EMPTY_PARAGRAPH = {
+  type: 'paragraph' as const,
+  children: [],
+  direction: null,
+  format: '' as const,
+  indent: 0,
+  textFormat: 0,
+  textStyle: '',
+  version: 1 as const,
+}
+
+const createTextNode = (text: string) => ({
+  type: 'text' as const,
+  detail: 0,
+  format: 0,
+  mode: 'normal' as const,
+  style: '',
+  text,
+  version: 1 as const,
+})
+
+const createLineBreakNode = () => ({
+  type: 'linebreak' as const,
+  version: 1 as const,
+})
+
+const asRecord = (value: unknown): UnknownRecord | null => {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+    return null
+  }
+
+  return value as UnknownRecord
+}
+
+export const isLexicalRichTextValue = (value: unknown): value is LexicalRichTextValue => {
+  const documentRecord = asRecord(value)
+  const rootRecord = asRecord(documentRecord?.root)
+
+  return Boolean(rootRecord && rootRecord.type === 'root' && Array.isArray(rootRecord.children))
+}
+
+export const createLexicalRichTextFromPlainText = (value: string): LexicalRichTextValue => {
+  const normalizedText = value.replace(/\r\n/g, '\n').trim()
+  const paragraphs = normalizedText
+    ? normalizedText
+      .split(/\n{2,}/)
+      .map((paragraph) => paragraph.trim())
+      .filter(Boolean)
+    : []
+
+  const children =
+    paragraphs.length > 0
+      ? paragraphs.map((paragraph) => {
+          const lines = paragraph.split('\n')
+          const paragraphChildren = lines.flatMap((line, index) => {
+            const nodes = [createTextNode(line)]
+
+            if (index < lines.length - 1) {
+              nodes.push(createLineBreakNode())
+            }
+
+            return nodes
+          })
+
+          return {
+            ...EMPTY_PARAGRAPH,
+            children: paragraphChildren,
+          }
+        })
+      : [EMPTY_PARAGRAPH]
+
+  return {
+    root: {
+      type: 'root',
+      children,
+      direction: null,
+      format: '',
+      indent: 0,
+      version: 1,
+    },
+  }
+}
+
+export const coerceLexicalRichTextValue = (value: unknown): unknown => {
+  if (isLexicalRichTextValue(value)) {
+    return value
+  }
+
+  if (typeof value === 'string') {
+    return createLexicalRichTextFromPlainText(value)
+  }
+
+  return value
+}

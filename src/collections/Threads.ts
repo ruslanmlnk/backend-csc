@@ -1,5 +1,7 @@
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import type { CollectionBeforeChangeHook, CollectionConfig } from 'payload'
 import { isAdminRequest } from '../access/isAdmin'
+import { coerceLexicalRichTextValue } from '../fields/richText'
 
 const assignAuthorOnCreate: CollectionBeforeChangeHook = async ({ data, operation, req }) => {
   if (operation !== 'create' || !data || typeof data !== 'object') {
@@ -21,6 +23,22 @@ const assignAuthorOnCreate: CollectionBeforeChangeHook = async ({ data, operatio
   }
 }
 
+const normalizeThreadContent: CollectionBeforeChangeHook = async ({ data }) => {
+  if (!data || typeof data !== 'object') {
+    return data
+  }
+
+  const threadData = data as Record<string, unknown>
+  if (!('content' in threadData)) {
+    return data
+  }
+
+  return {
+    ...threadData,
+    content: coerceLexicalRichTextValue(threadData.content),
+  }
+}
+
 export const Threads: CollectionConfig = {
   slug: 'threads',
   admin: {
@@ -34,7 +52,7 @@ export const Threads: CollectionConfig = {
     delete: async ({ req }) => isAdminRequest(req),
   },
   hooks: {
-    beforeChange: [assignAuthorOnCreate],
+    beforeChange: [normalizeThreadContent, assignAuthorOnCreate],
   },
   fields: [
     {
@@ -79,9 +97,13 @@ export const Threads: CollectionConfig = {
     },
     {
       name: 'content',
-      type: 'textarea',
+      type: 'richText',
       required: true,
       label: 'Content',
+      editor: lexicalEditor(),
+      admin: {
+        description: 'Supports formatting, links, and image uploads inside forum threads.',
+      },
     },
     {
       name: 'author',
