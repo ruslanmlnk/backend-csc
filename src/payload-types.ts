@@ -1326,6 +1326,7 @@ export interface Blog {
   id: number;
   title: string;
   description: string;
+  horizontalBanner?: (number | null) | Banner;
   banner?: (number | null) | Banner;
   seo: {
     title: string;
@@ -1558,6 +1559,7 @@ export interface HomeSelect<T extends boolean = true> {
 export interface BlogSelect<T extends boolean = true> {
   title?: T;
   description?: T;
+  horizontalBanner?: T;
   banner?: T;
   seo?:
     | T

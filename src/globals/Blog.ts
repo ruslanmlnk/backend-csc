@@ -23,6 +23,16 @@ export const Blog: GlobalConfig = {
             label: 'Hero Description',
         },
         {
+            name: 'horizontalBanner',
+            type: 'relationship',
+            relationTo: 'banners',
+            required: false,
+            label: 'Horizontal Banner',
+            admin: {
+                description: 'Banner shown below the hero heading on the blog page.',
+            },
+        },
+        {
             name: 'banner',
             type: 'relationship',
             relationTo: 'banners',
