@@ -11,6 +11,7 @@ import * as migration_20260305_002100_add_forum_page_pins from './20260305_00210
 import * as migration_20260322_060000_add_blog_horizontal_banner from './20260322_060000_add_blog_horizontal_banner';
 import * as migration_20260322_070000_convert_forum_text_to_lexical from './20260322_070000_convert_forum_text_to_lexical';
 import * as migration_20260322_084046_add_localization_support from './20260322_084046_add_localization_support';
+import * as migration_20260322_101500_relax_legacy_localized_columns from './20260322_101500_relax_legacy_localized_columns';
 
 export const migrations = [
   {
@@ -77,5 +78,10 @@ export const migrations = [
     up: migration_20260322_084046_add_localization_support.up,
     down: migration_20260322_084046_add_localization_support.down,
     name: '20260322_084046_add_localization_support'
+  },
+  {
+    up: migration_20260322_101500_relax_legacy_localized_columns.up,
+    down: migration_20260322_101500_relax_legacy_localized_columns.down,
+    name: '20260322_101500_relax_legacy_localized_columns',
   },
 ];
