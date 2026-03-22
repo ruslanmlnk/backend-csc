@@ -3,30 +3,7 @@ type UnknownRecord = Record<string, unknown>
 export type LexicalRichTextValue = {
   root: {
     type: 'root'
-    children: Array<{
-      type: 'paragraph'
-      children: Array<
-        | {
-            type: 'text'
-            detail: number
-            format: number
-            mode: 'normal'
-            style: string
-            text: string
-            version: 1
-          }
-        | {
-            type: 'linebreak'
-            version: 1
-          }
-      >
-      direction: null
-      format: ''
-      indent: 0
-      textFormat: 0
-      textStyle: ''
-      version: 1
-    }>
+    children: ParagraphNode[]
     direction: null
     format: ''
     indent: 0
@@ -34,7 +11,35 @@ export type LexicalRichTextValue = {
   }
 }
 
-const EMPTY_PARAGRAPH = {
+type TextNode = {
+  type: 'text'
+  detail: number
+  format: number
+  mode: 'normal'
+  style: string
+  text: string
+  version: 1
+}
+
+type LineBreakNode = {
+  type: 'linebreak'
+  version: 1
+}
+
+type ParagraphChildNode = TextNode | LineBreakNode
+
+type ParagraphNode = {
+  type: 'paragraph'
+  children: ParagraphChildNode[]
+  direction: null
+  format: ''
+  indent: 0
+  textFormat: 0
+  textStyle: ''
+  version: 1
+}
+
+const EMPTY_PARAGRAPH: ParagraphNode = {
   type: 'paragraph' as const,
   children: [],
   direction: null,
@@ -45,7 +50,7 @@ const EMPTY_PARAGRAPH = {
   version: 1 as const,
 }
 
-const createTextNode = (text: string) => ({
+const createTextNode = (text: string): TextNode => ({
   type: 'text' as const,
   detail: 0,
   format: 0,
@@ -55,7 +60,7 @@ const createTextNode = (text: string) => ({
   version: 1 as const,
 })
 
-const createLineBreakNode = () => ({
+const createLineBreakNode = (): LineBreakNode => ({
   type: 'linebreak' as const,
   version: 1 as const,
 })
@@ -89,7 +94,7 @@ export const createLexicalRichTextFromPlainText = (value: string): LexicalRichTe
       ? paragraphs.map((paragraph) => {
           const lines = paragraph.split('\n')
           const paragraphChildren = lines.flatMap((line, index) => {
-            const nodes = [createTextNode(line)]
+            const nodes: ParagraphChildNode[] = [createTextNode(line)]
 
             if (index < lines.length - 1) {
               nodes.push(createLineBreakNode())
