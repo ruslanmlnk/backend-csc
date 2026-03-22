@@ -101,6 +101,11 @@ export const Threads: CollectionConfig = {
       required: true,
       label: 'Content',
       editor: lexicalEditor(),
+      hooks: {
+        afterRead: [
+          ({ value }) => coerceLexicalRichTextValue(value),
+        ],
+      },
       admin: {
         description: 'Supports formatting, links, and image uploads inside forum threads.',
       },

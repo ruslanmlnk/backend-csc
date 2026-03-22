@@ -128,6 +128,11 @@ export const Comments: CollectionConfig = {
       required: true,
       label: 'Comment',
       editor: lexicalEditor(),
+      hooks: {
+        afterRead: [
+          ({ value }) => coerceLexicalRichTextValue(value),
+        ],
+      },
       admin: {
         description: 'Supports formatting, links, and image uploads inside forum comments.',
       },
