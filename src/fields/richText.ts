@@ -73,11 +73,42 @@ const asRecord = (value: unknown): UnknownRecord | null => {
   return value as UnknownRecord
 }
 
+const looksLikeSerializedJson = (value: string): boolean => {
+  const trimmed = value.trim()
+
+  return (
+    (trimmed.startsWith('{') && trimmed.endsWith('}'))
+    || (trimmed.startsWith('[') && trimmed.endsWith(']'))
+    || (trimmed.startsWith('"') && trimmed.endsWith('"'))
+  )
+}
+
 export const isLexicalRichTextValue = (value: unknown): value is LexicalRichTextValue => {
   const documentRecord = asRecord(value)
   const rootRecord = asRecord(documentRecord?.root)
 
   return Boolean(rootRecord && rootRecord.type === 'root' && Array.isArray(rootRecord.children))
+}
+
+const tryParseSerializedLexicalRichText = (
+  value: string,
+  depth = 0,
+): LexicalRichTextValue | null => {
+  if (depth > 2 || !looksLikeSerializedJson(value)) {
+    return null
+  }
+
+  try {
+    const parsed = JSON.parse(value) as unknown
+
+    if (typeof parsed === 'string') {
+      return tryParseSerializedLexicalRichText(parsed, depth + 1)
+    }
+
+    return isLexicalRichTextValue(parsed) ? parsed : null
+  } catch {
+    return null
+  }
 }
 
 export const createLexicalRichTextFromPlainText = (value: string): LexicalRichTextValue => {
@@ -128,7 +159,7 @@ export const coerceLexicalRichTextValue = (value: unknown): unknown => {
   }
 
   if (typeof value === 'string') {
-    return createLexicalRichTextFromPlainText(value)
+    return tryParseSerializedLexicalRichText(value) || createLexicalRichTextFromPlainText(value)
   }
 
   return value
